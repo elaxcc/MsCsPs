@@ -1,0 +1,13 @@
+$ cat .gitignore
+*.ncb
+*.suo
+*.sdf
+*.opensdf
+*.db
+*.vcxproj.filters
+*.opendb
+Debug/
+Release/
+ipch/
+*.user
+*~
