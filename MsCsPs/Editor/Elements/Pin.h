@@ -1,5 +1,7 @@
 #pragma once
 
+#include "Utility/Geometry.h"
+
 namespace GDS
 {
 
@@ -13,7 +15,7 @@ public:
 	};
 
 public:
-	Pin(const std::string& name, PinType type);
+	Pin(const std::string& name, PinType type, const Point& position);
 	~Pin();
 
 	void setName(std::string name);
@@ -22,9 +24,13 @@ public:
 	void setType(PinType type);
 	PinType getType() const;
 
+	void setPosition(Point position);
+	Point getPosition() const;
+
 private:
 	std::string name_;
 	PinType type_;
+	Point position_;
 };
 typedef boost::shared_ptr<Pin> PinPtr;
 

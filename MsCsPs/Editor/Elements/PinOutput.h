@@ -8,7 +8,7 @@ namespace GDS
 class PinOutput : public Pin
 {
 public:
-	PinOutput(const std::string& name);
+	PinOutput(const std::string& name, const Point& position);
 	~PinOutput();
 };
 

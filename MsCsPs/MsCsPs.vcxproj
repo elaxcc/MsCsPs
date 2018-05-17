@@ -89,6 +89,7 @@
     <ClCompile Include="Editor\Editor.cpp" />
     <ClCompile Include="Editor\EditorView.cpp" />
     <ClCompile Include="Editor\Elements\Pin.cpp" />
+    <ClCompile Include="Editor\Elements\PinFactory.cpp" />
     <ClCompile Include="Editor\Elements\PinInput.cpp" />
     <ClCompile Include="Editor\Elements\PinOutput.cpp" />
     <ClCompile Include="main.cpp" />
@@ -141,9 +142,11 @@
     <ClInclude Include="Editor\Editor.h" />
     <ClInclude Include="Editor\EditorView.h" />
     <ClInclude Include="Editor\Elements\Pin.h" />
+    <ClInclude Include="Editor\Elements\PinFactory.h" />
     <ClInclude Include="Editor\Elements\PinInput.h" />
     <ClInclude Include="Editor\Elements\PinOutput.h" />
     <ClInclude Include="stdafx.h" />
+    <ClInclude Include="Utility\Geometry.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

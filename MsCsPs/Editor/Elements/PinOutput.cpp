@@ -5,8 +5,8 @@
 namespace GDS
 {
 
-PinOutput::PinOutput(const std::string& name)
-	: Pin(name, Pin::PinType_Output)
+PinOutput::PinOutput(const std::string& name, const Point& position)
+	: Pin(name, Pin::PinType_Output, position)
 {
 
 }
