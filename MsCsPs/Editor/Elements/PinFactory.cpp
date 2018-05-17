@@ -15,9 +15,9 @@ PinFactory::~PinFactory()
 
 }
 
-Pin* PinFactory::CreatePin(const std::string& name, Pin::PinType type, const Point& position) const
+PinPtr PinFactory::CreatePin(const std::string& name, Pin::PinType type, const Point& position) const
 {
-	return new Pin(name, type, position);
+	return PinPtr(new Pin(name, type, position));
 }
 
 PinInput* PinFactory::CreatePinInput(const std::string& name, const Point& position) const

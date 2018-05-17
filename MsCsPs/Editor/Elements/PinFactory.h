@@ -12,7 +12,7 @@ public:
 	PinFactory();
 	~PinFactory();
 
-	Pin* CreatePin(const std::string& name, Pin::PinType type, const Point& position) const;
+	PinPtr CreatePin(const std::string& name, Pin::PinType type, const Point& position) const;
 	PinInput* CreatePinInput(const std::string& name, const Point& position) const;
 	PinOutput* CreatePinOutput(const std::string& name, const Point& position) const;
 };
