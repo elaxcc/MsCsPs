@@ -7,6 +7,9 @@ namespace GDS
 
 Editor::Editor()
 {
+	// create command history
+	command_history_.reset(new CommandHistory());
+
 	// create PinFactory
 	pin_factory_.reset(new PinFactory());
 
@@ -24,12 +27,17 @@ void Editor::setEditorView(EditorView *editor)
 
 }
 
-ElementFactoryPtr Editor::getElementFactory()
+CommandHistoryPtr Editor::getCommandHistory() const
+{
+	return command_history_;
+}
+
+ElementFactoryPtr Editor::getElementFactory() const
 {
 	return element_factory_;
 }
 
-PinFactoryPtr Editor::getPinFactory()
+PinFactoryPtr Editor::getPinFactory() const
 {
 	return pin_factory_;
 }
