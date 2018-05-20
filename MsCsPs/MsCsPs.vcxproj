@@ -88,6 +88,8 @@
     <ClCompile Include="Editor\Commands\ICommand.cpp" />
     <ClCompile Include="Editor\Editor.cpp" />
     <ClCompile Include="Editor\EditorView.cpp" />
+    <ClCompile Include="Editor\Elements\IElement.cpp" />
+    <ClCompile Include="Editor\Elements\IElementView.cpp" />
     <ClCompile Include="Editor\Elements\Pin.cpp" />
     <ClCompile Include="Editor\Elements\PinFactory.cpp" />
     <ClCompile Include="Editor\Elements\PinInput.cpp" />
@@ -141,6 +143,8 @@
     <ClInclude Include="Editor\Commands\ICommand.h" />
     <ClInclude Include="Editor\Editor.h" />
     <ClInclude Include="Editor\EditorView.h" />
+    <ClInclude Include="Editor\Elements\IElement.h" />
+    <ClInclude Include="Editor\Elements\IElementView.h" />
     <ClInclude Include="Editor\Elements\Pin.h" />
     <ClInclude Include="Editor\Elements\PinFactory.h" />
     <ClInclude Include="Editor\Elements\PinInput.h" />
