@@ -20,4 +20,6 @@ private:
 	std::list<ICommandPtr> cmd_canceled_list_;
 };
 
+typedef std::shared_ptr<CommandHistory> CommandHistoryPtr;
+
 } // namespace GDS

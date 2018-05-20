@@ -14,6 +14,6 @@ public:
 	virtual void setView(const IElementViewPtr& view) = 0;
 };
 
-typedef boost::shared_ptr<IElement> IElementPtr;
+typedef std::shared_ptr<IElement> IElementPtr;
 
 } // namespace GDS

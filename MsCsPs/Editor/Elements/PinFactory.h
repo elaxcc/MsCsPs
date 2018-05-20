@@ -17,6 +17,6 @@ public:
 	PinOutput* CreatePinOutput(const std::string& name, const Point& position) const;
 };
 
-typedef boost::shared_ptr<PinFactory> PinFactoryPtr;
+typedef std::shared_ptr<PinFactory> PinFactoryPtr;
 
 } // namespace GDS

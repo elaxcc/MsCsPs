@@ -32,6 +32,6 @@ private:
 	PinType type_;
 	Point position_;
 };
-typedef boost::shared_ptr<Pin> PinPtr;
+typedef std::shared_ptr<Pin> PinPtr;
 
 } // namespace GDS

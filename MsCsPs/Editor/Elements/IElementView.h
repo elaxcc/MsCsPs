@@ -14,6 +14,6 @@ public:
 	virtual Point getPosition() = 0;
 };
 
-typedef boost::shared_ptr<IElementView> IElementViewPtr;
+typedef std::shared_ptr<IElementView> IElementViewPtr;
 
 } // namespace GDS
