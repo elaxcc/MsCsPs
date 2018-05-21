@@ -5,7 +5,7 @@
 namespace GDS
 {
 
-Pin::Pin(cconst std::string& name, PinType type, const Point& position)
+Pin::Pin(const std::string& name, PinType type, const Point& position)
 	: name_(name)
 	, type_(type)
 	, position_(position)

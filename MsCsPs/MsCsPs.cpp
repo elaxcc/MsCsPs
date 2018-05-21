@@ -1,3 +1,5 @@
+#include "stdafx.h"
+
 #include "MsCsPs.h"
 
 MsCsPs::MsCsPs(QWidget *parent)
