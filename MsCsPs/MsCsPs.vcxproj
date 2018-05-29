@@ -96,9 +96,14 @@
     <ClCompile Include="Editor\Elements\PinFactory.cpp" />
     <ClCompile Include="Editor\Elements\PinInput.cpp" />
     <ClCompile Include="Editor\Elements\PinOutput.cpp" />
+    <ClCompile Include="Library\Lib.cpp" />
+    <ClCompile Include="Library\LibController.cpp" />
+    <ClCompile Include="Library\LibElement.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="MsCsPs.cpp" />
     <ClCompile Include="QtEditor\QtEditor.cpp" />
+    <ClCompile Include="QtLibrary\QtLibElement.cpp" />
+    <ClCompile Include="QtLibrary\QtLibWnd.cpp" />
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
@@ -153,7 +158,14 @@
     <ClInclude Include="Editor\Elements\PinFactory.h" />
     <ClInclude Include="Editor\Elements\PinInput.h" />
     <ClInclude Include="Editor\Elements\PinOutput.h" />
+    <ClInclude Include="Library\ILibElement.h" />
+    <ClInclude Include="Library\Lib.h" />
+    <ClInclude Include="Library\LibController.h" />
+    <ClInclude Include="Library\LibElement.h" />
+    <ClInclude Include="Library\LibView.h" />
     <ClInclude Include="QtEditor\QtEditor.h" />
+    <ClInclude Include="QtLibrary\QtLibElement.h" />
+    <ClInclude Include="QtLibrary\QtLibWnd.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="Utility\Geometry.h" />
   </ItemGroup>
