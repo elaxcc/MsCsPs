@@ -14,7 +14,7 @@ public:
 	// IlibElement
 	virtual const std::string& getName() const;
 	virtual const std::string& getComment() const;
-	virtual std::vector<unsigned char> getIcon() const;
+	virtual const std::vector<unsigned char>& getIcon() const;
 
 private:
 	std::string name_;

@@ -1,5 +1,7 @@
 #include "stdafx.h"
 
+#include "Lib.h"
+
 namespace GDS
 {
 
@@ -10,10 +12,10 @@ Lib::Lib()
 
 Lib::~Lib()
 {
-	elements_.erase();
+	elements_.clear();
 }
 
-const std::vector<ILibElementPtr>& Lib::getElements() const
+const std::list<ILibElementPtr>& Lib::getElements() const
 {
 	return elements_;
 }

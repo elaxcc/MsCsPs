@@ -11,7 +11,7 @@ public:
 	Lib();
 	~Lib();
 
-	const std::vector<ILibElementPtr>& getElements() const;
+	const std::list<ILibElementPtr>& getElements() const;
 	const ILibElementPtr getParent() const;
 
 private:
