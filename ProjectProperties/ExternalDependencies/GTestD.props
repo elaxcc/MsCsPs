@@ -1,0 +1,27 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ImportGroup Label="PropertySheets" />
+  <PropertyGroup Label="UserMacros">
+    <gtest_libd>gtestd.lib;</gtest_libd>
+    <gtest_lib_dir>../../Thirdparty\googletest\googletest\msvc\2010\gtest\Win32-Debug\</gtest_lib_dir>
+  </PropertyGroup>
+  <PropertyGroup />
+  <ItemDefinitionGroup>
+    <Link>
+      <AdditionalDependencies>$(gtest_libd);%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(gtest_lib_dir);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+    </Link>
+    <ClCompile>
+      <AdditionalIncludeDirectories>%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
+    </ClCompile>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <BuildMacro Include="gtest_libd">
+      <Value>$(gtest_libd)</Value>
+    </BuildMacro>
+    <BuildMacro Include="gtest_lib_dir">
+      <Value>$(gtest_lib_dir)</Value>
+    </BuildMacro>
+  </ItemGroup>
+</Project>
