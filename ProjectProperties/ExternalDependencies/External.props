@@ -6,7 +6,7 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup>
-    <_PropertySheetDisplayName>ExternalCommon</_PropertySheetDisplayName>
+    <_PropertySheetDisplayName>External</_PropertySheetDisplayName>
   </PropertyGroup>
   <ItemDefinitionGroup />
   <ItemGroup />
