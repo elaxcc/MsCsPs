@@ -1,0 +1,39 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="GTest.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="stdafx.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\MsCsPs\Utility\DataStorage\DataStorage.cpp">
+      <Filter>Source Files\GDS</Filter>
+    </ClCompile>
+    <ClCompile Include="GDS\GDS_DataStorage_Test.cpp">
+      <Filter>Source Files\GDS</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="stdafx.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="targetver.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="ReadMe.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{12810d3b-01c6-4cc7-9640-c4eca07d7cb7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{03378265-e798-4a10-b18a-6b5267692422}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\GDS">
+      <UniqueIdentifier>{f60d1643-4857-491c-afa4-d958d04f4a56}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>
