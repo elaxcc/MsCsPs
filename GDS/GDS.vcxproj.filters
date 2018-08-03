@@ -1,0 +1,234 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;hm;inl;inc;xsd</Extensions>
+    </Filter>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{D9D6E242-F8AF-46E4-B9FD-80ECBC20BA3E}</UniqueIdentifier>
+      <Extensions>qrc;*</Extensions>
+      <ParseFiles>false</ParseFiles>
+    </Filter>
+    <Filter Include="Form Files">
+      <UniqueIdentifier>{99349809-55BA-4b9d-BF79-8FDBB0286EB3}</UniqueIdentifier>
+      <Extensions>ui</Extensions>
+    </Filter>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{D9D6E242-F8AF-46E4-B9FD-80ECBC20BA3E}</UniqueIdentifier>
+      <Extensions>qrc;*</Extensions>
+      <ParseFiles>false</ParseFiles>
+    </Filter>
+    <Filter Include="Generated Files">
+      <UniqueIdentifier>{71ED8ED8-ACB9-4CE9-BBE1-E00B30144E11}</UniqueIdentifier>
+      <Extensions>moc;h;cpp</Extensions>
+      <SourceControlFiles>False</SourceControlFiles>
+    </Filter>
+    <Filter Include="Header Files\Editor">
+      <UniqueIdentifier>{d94f7c49-a6e2-4dd1-a96e-a87d42984115}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Library">
+      <UniqueIdentifier>{eac188bb-fc3e-4b11-b328-027e58199929}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\QtEditor">
+      <UniqueIdentifier>{c6d109eb-9162-4fb9-86cd-35022abf0f73}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\QtLibrary">
+      <UniqueIdentifier>{1b965933-2aa1-40ad-bb8a-0ff8e22d2dab}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Utility">
+      <UniqueIdentifier>{71d8e517-d285-44e5-91d0-59e97b4d8580}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Editor\Commands">
+      <UniqueIdentifier>{b1fcfea2-ffed-4670-9ca2-17603b2011b5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Editor\Elements">
+      <UniqueIdentifier>{624b1727-774f-45d8-acec-e4dc0732d6d7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Utility\DataStorage">
+      <UniqueIdentifier>{bc85c18f-2b05-4e75-b09f-d6a0612132dc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Editor">
+      <UniqueIdentifier>{6436966f-6aee-4e61-b597-c3bd4fd5540c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Library">
+      <UniqueIdentifier>{142757e5-42e0-4f73-b6de-a95e824cb680}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\QtEditor">
+      <UniqueIdentifier>{6a9122af-2263-4641-a885-b7323d36360b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\QtLibrary">
+      <UniqueIdentifier>{e4b24f8e-74dd-4c52-b37b-46fe98567510}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Utility">
+      <UniqueIdentifier>{48ec35d5-415e-4263-a16a-e63935f962ba}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Editor\Commands">
+      <UniqueIdentifier>{878c91ee-2bee-45b6-afa5-df293d53d124}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Editor\Elements">
+      <UniqueIdentifier>{595b14fc-5ec5-484d-a8fc-df52fd8438dc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Utility\DataStorage">
+      <UniqueIdentifier>{5ea85e8c-3d04-4634-a9ea-ae68bc691588}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="main.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="stdafx.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="GDS_Wnd.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Editor\Editor.cpp">
+      <Filter>Source Files\Editor</Filter>
+    </ClCompile>
+    <ClCompile Include="Editor\EditorView.cpp">
+      <Filter>Source Files\Editor</Filter>
+    </ClCompile>
+    <ClCompile Include="Editor\Commands\CommandHistory.cpp">
+      <Filter>Source Files\Editor\Commands</Filter>
+    </ClCompile>
+    <ClCompile Include="Editor\Commands\ICommand.cpp">
+      <Filter>Source Files\Editor\Commands</Filter>
+    </ClCompile>
+    <ClCompile Include="Editor\Elements\ElementFactory.cpp">
+      <Filter>Source Files\Editor\Elements</Filter>
+    </ClCompile>
+    <ClCompile Include="Editor\Elements\IElement.cpp">
+      <Filter>Source Files\Editor\Elements</Filter>
+    </ClCompile>
+    <ClCompile Include="Editor\Elements\IElementView.cpp">
+      <Filter>Source Files\Editor\Elements</Filter>
+    </ClCompile>
+    <ClCompile Include="Editor\Elements\Pin.cpp">
+      <Filter>Source Files\Editor\Elements</Filter>
+    </ClCompile>
+    <ClCompile Include="Editor\Elements\PinFactory.cpp">
+      <Filter>Source Files\Editor\Elements</Filter>
+    </ClCompile>
+    <ClCompile Include="Editor\Elements\PinInput.cpp">
+      <Filter>Source Files\Editor\Elements</Filter>
+    </ClCompile>
+    <ClCompile Include="Editor\Elements\PinOutput.cpp">
+      <Filter>Source Files\Editor\Elements</Filter>
+    </ClCompile>
+    <ClCompile Include="Library\Lib.cpp">
+      <Filter>Source Files\Library</Filter>
+    </ClCompile>
+    <ClCompile Include="Library\LibController.cpp">
+      <Filter>Source Files\Library</Filter>
+    </ClCompile>
+    <ClCompile Include="Library\LibElement.cpp">
+      <Filter>Source Files\Library</Filter>
+    </ClCompile>
+    <ClCompile Include="QtEditor\QtEditor.cpp">
+      <Filter>Source Files\QtEditor</Filter>
+    </ClCompile>
+    <ClCompile Include="QtLibrary\QtLibElement.cpp">
+      <Filter>Source Files\QtLibrary</Filter>
+    </ClCompile>
+    <ClCompile Include="QtLibrary\QtLibWnd.cpp">
+      <Filter>Source Files\QtLibrary</Filter>
+    </ClCompile>
+    <ClCompile Include="Utility\DataStorage\DataStorage.cpp">
+      <Filter>Source Files\Utility</Filter>
+    </ClCompile>
+    <ClCompile Include="Utility\DataStorage\DataStorageCommon.cpp">
+      <Filter>Source Files\Utility</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="stdafx.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Editor\Editor.h">
+      <Filter>Header Files\Editor</Filter>
+    </ClInclude>
+    <ClInclude Include="Editor\EditorView.h">
+      <Filter>Header Files\Editor</Filter>
+    </ClInclude>
+    <ClInclude Include="Editor\Commands\CommandHistory.h">
+      <Filter>Header Files\Editor\Commands</Filter>
+    </ClInclude>
+    <ClInclude Include="Editor\Commands\ICommand.h">
+      <Filter>Header Files\Editor\Commands</Filter>
+    </ClInclude>
+    <ClInclude Include="Editor\Elements\ElementFactory.h">
+      <Filter>Header Files\Editor\Elements</Filter>
+    </ClInclude>
+    <ClInclude Include="Editor\Elements\IElement.h">
+      <Filter>Header Files\Editor\Elements</Filter>
+    </ClInclude>
+    <ClInclude Include="Editor\Elements\IElementView.h">
+      <Filter>Header Files\Editor\Elements</Filter>
+    </ClInclude>
+    <ClInclude Include="Editor\Elements\Pin.h">
+      <Filter>Header Files\Editor\Elements</Filter>
+    </ClInclude>
+    <ClInclude Include="Editor\Elements\PinFactory.h">
+      <Filter>Header Files\Editor\Elements</Filter>
+    </ClInclude>
+    <ClInclude Include="Editor\Elements\PinInput.h">
+      <Filter>Header Files\Editor\Elements</Filter>
+    </ClInclude>
+    <ClInclude Include="Editor\Elements\PinOutput.h">
+      <Filter>Header Files\Editor\Elements</Filter>
+    </ClInclude>
+    <ClInclude Include="Library\ILibElement.h">
+      <Filter>Header Files\Library</Filter>
+    </ClInclude>
+    <ClInclude Include="Library\Lib.h">
+      <Filter>Header Files\Library</Filter>
+    </ClInclude>
+    <ClInclude Include="Library\LibController.h">
+      <Filter>Header Files\Library</Filter>
+    </ClInclude>
+    <ClInclude Include="Library\LibElement.h">
+      <Filter>Header Files\Library</Filter>
+    </ClInclude>
+    <ClInclude Include="Library\LibView.h">
+      <Filter>Header Files\Library</Filter>
+    </ClInclude>
+    <ClInclude Include="QtEditor\QtEditor.h">
+      <Filter>Header Files\QtEditor</Filter>
+    </ClInclude>
+    <ClInclude Include="QtLibrary\QtLibElement.h">
+      <Filter>Header Files\QtLibrary</Filter>
+    </ClInclude>
+    <ClInclude Include="QtLibrary\QtLibWnd.h">
+      <Filter>Header Files\QtLibrary</Filter>
+    </ClInclude>
+    <ClInclude Include="Utility\Geometry.h">
+      <Filter>Header Files\Utility</Filter>
+    </ClInclude>
+    <ClInclude Include="Utility\DataStorage\DataStorage.h">
+      <Filter>Header Files\Utility\DataStorage</Filter>
+    </ClInclude>
+    <ClInclude Include="Utility\DataStorage\DataStorageCommon.h">
+      <Filter>Header Files\Utility\DataStorage</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <QtMoc Include="GDS_Wnd.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+  </ItemGroup>
+  <ItemGroup>
+    <QtUic Include="GDS_Wnd.ui">
+      <Filter>Form Files</Filter>
+    </QtUic>
+  </ItemGroup>
+  <ItemGroup>
+    <QtRcc Include="GDS_Wnd.qrc">
+      <Filter>Resource Files</Filter>
+    </QtRcc>
+  </ItemGroup>
+</Project>

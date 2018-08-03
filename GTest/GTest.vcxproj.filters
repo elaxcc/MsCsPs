@@ -7,10 +7,10 @@
     <ClCompile Include="stdafx.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\MsCsPs\Utility\DataStorage\DataStorage.cpp">
+    <ClCompile Include="GDS\GDS_DataStorage_Test.cpp">
       <Filter>Source Files\GDS</Filter>
     </ClCompile>
-    <ClCompile Include="GDS\GDS_DataStorage_Test.cpp">
+    <ClCompile Include="..\GDS\Utility\DataStorage\DataStorage.cpp">
       <Filter>Source Files\GDS</Filter>
     </ClCompile>
   </ItemGroup>

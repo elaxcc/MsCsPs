@@ -1,8 +1,8 @@
 <UI version="4.0" >
- <class>MsCsPsClass</class>
- <widget class="QMainWindow" name="MsCsPsClass" >
+ <class>GDS_WndClass</class>
+ <widget class="QMainWindow" name="GDS_WndClass" >
   <property name="objectName" >
-   <string notr="true">MsCsPsClass</string>
+   <string notr="true">GDS_WndClass</string>
   </property>
   <property name="geometry" >
    <rect>
@@ -13,7 +13,7 @@
    </rect>
   </property>
   <property name="windowTitle" >
-   <string>MsCsPs</string>
+   <string>GDS_Wnd</string>
   </property>
   <widget class="QMenuBar" name="menuBar" />
   <widget class="QToolBar" name="mainToolBar" />
@@ -23,7 +23,7 @@
  <layoutDefault spacing="6" margin="11" />
  <pixmapfunction></pixmapfunction>
  <resources>
-   <include location="MsCsPs.qrc"/>
+   <include location="GDS_Wnd.qrc"/>
  </resources>
  <connections/>
 </UI>

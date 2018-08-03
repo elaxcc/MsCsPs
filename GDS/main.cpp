@@ -1,14 +1,11 @@
 #include "stdafx.h"
-
-#include "MsCsPs.h"
+#include "GDS_Wnd.h"
 #include <QtWidgets/QApplication>
 
 int main(int argc, char *argv[])
 {
 	QApplication a(argc, argv);
-
-	MsCsPs w;
+	GDS_Wnd w;
 	w.show();
-
 	return a.exec();
 }

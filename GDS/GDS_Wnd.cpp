@@ -1,8 +1,7 @@
 #include "stdafx.h"
+#include "GDS_Wnd.h"
 
-#include "MsCsPs.h"
-
-MsCsPs::MsCsPs(QWidget *parent)
+GDS_Wnd::GDS_Wnd(QWidget *parent)
 	: QMainWindow(parent)
 {
 	ui.setupUi(this);

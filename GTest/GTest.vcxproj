@@ -58,8 +58,8 @@
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
-    <Import Project="..\ProjectProperties\Common\Common.props" />
     <Import Project="..\ProjectProperties\ExternalDependencies\ExternalD.props" />
+    <Import Project="..\ProjectProperties\Common\Common.props" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
@@ -155,7 +155,7 @@
     <ClInclude Include="targetver.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\MsCsPs\Utility\DataStorage\DataStorage.cpp" />
+    <ClCompile Include="..\GDS\Utility\DataStorage\DataStorage.cpp" />
     <ClCompile Include="GDS\GDS_DataStorage_Test.cpp" />
     <ClCompile Include="GTest.cpp" />
     <ClCompile Include="stdafx.cpp">

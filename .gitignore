@@ -4,7 +4,6 @@ $ cat .gitignore
 *.sdf
 *.opensdf
 *.db
-*.vcxproj.filters
 *.opendb
 Debug/
 Release/

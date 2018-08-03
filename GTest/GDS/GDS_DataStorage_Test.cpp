@@ -1,6 +1,6 @@
 #include "stdafx.h"
 
-#include "MsCsPs/Utility/DataStorage/DataStorage.h"
+#include "GDS/Utility/DataStorage/DataStorage.h"
 
 TEST(GDS_DataStorage, Serializer)
 {
