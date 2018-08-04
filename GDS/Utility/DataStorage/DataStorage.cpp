@@ -25,7 +25,7 @@ void Serializer::exec()
 
 void Serializer::insert(unsigned int data_size, void *data)
 {
-	data_.insert(data_.end(), data_size, (const unsigned char&) (data));
+	
 }
 
 const std::vector<unsigned char>& Serializer::get_data() const

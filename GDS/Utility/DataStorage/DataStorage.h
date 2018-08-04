@@ -1,6 +1,6 @@
 #pragma once
 
-//#include "Utility/DataStorage/DataStorageCommon.h"
+#include "DataStorageCommon.h"
 
 namespace GDS
 {
