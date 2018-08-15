@@ -22,7 +22,7 @@ ObjectData::ObjectData(const std::string& name)
 
 ObjectData::~ObjectData()
 {
-
+	fields_.clear();
 }
 
 bool ObjectData::insert(const IDataStorageObjectPtr& obj)
@@ -33,9 +33,9 @@ bool ObjectData::insert(const IDataStorageObjectPtr& obj)
 	return result.second;
 }
 
-void ObjectData::remove(const IDataStorageObjectPtr& obj)
+void ObjectData::remove(const IDataStorageObject& obj)
 {
-	remove(obj->get_name());
+	remove(obj.get_name());
 }
 
 void ObjectData::remove(const std::string& name)
@@ -43,10 +43,14 @@ void ObjectData::remove(const std::string& name)
 	fields_.erase(name);
 }
 
-template<typename T>
-T* ObjectData::get(const std::string& name)
+bool ObjectData::empty()
 {
-	return dynamic_cast<T*>(fields_[name].get());
+	return fields_.empty();
+}
+
+unsigned ObjectData::get_data_size() const
+{
+	return 0;
 }
 
 std::vector<unsigned char> ObjectData::serialize()

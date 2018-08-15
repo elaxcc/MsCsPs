@@ -2,6 +2,7 @@
 
 #include "GDS/Utility/DataStorage/SimpleData.h"
 #include "GDS/Utility/DataStorage/ArrayData.h"
+#include "GDS/Utility/DataStorage/ObjectData.h"
 
 TEST(GDS_DataStorage, SimpleData)
 {
@@ -78,5 +79,38 @@ TEST(GDS_DataStorage, ArrayData)
 	ArrayData<TestedType> array_data_4(name, vec_data);
 	ASSERT_TRUE(std::equal(array_data_4.get_data().begin(), array_data_4.get_data().end(), data));
 	ASSERT_FALSE(std::equal(array_data_4.get_data().begin(), array_data_4.get_data().end(), not_data));
+}
+
+TEST(GDS_DataStorage, ObjectData)
+{
+	using namespace GDS::DataStorage;
+
+	// simple data functionality test
+
+	std::string simple_data_name_1 = "simple_data_1";
+	int simple_data_val_1 = 12345;
+	SimpleData<int> *simple_data_1 = new SimpleData<int>(simple_data_name_1, simple_data_val_1);
+
+	std::string simple_data_name_2 = "simple_data_2";
+	char simple_data_val_2 = 'D';
+	SimpleData<char> *simple_data_2 = new SimpleData<char>(simple_data_name_2, simple_data_val_2);
+
+	ObjectData obj_1;
+	obj_1.insert(IDataStorageObjectPtr(simple_data_1));
+	
+	SimpleData<int>* getted_simple_data = obj_1.get<SimpleData<int>>(simple_data_name_1);
+	ASSERT_EQ(simple_data_name_1, getted_simple_data->get_name());
+	ASSERT_EQ(simple_data_val_1, getted_simple_data->get_data());
+
+	simple_data_1 = new SimpleData<int>(simple_data_name_1, simple_data_val_1);
+	bool insert_result = obj_1.insert(std::make_shared<IDataStorageObject>(new SimpleData<char>()));
+	ASSERT_EQ(false, insert_result);
+
+	insert_result = obj_1.insert(IDataStorageObjectPtr(simple_data_2));
+	ASSERT_EQ(true, insert_result);
+
+	obj_1.remove(*simple_data_1);
+	obj_1.remove(*simple_data_2);
+	ASSERT_EQ(false, obj_1.empty());
 }
 

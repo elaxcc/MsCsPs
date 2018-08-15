@@ -15,7 +15,7 @@ public:
 	ArrayData();
 	ArrayData(std::string name, unsigned data_size, const T* data);
 	ArrayData(std::string name, const std::vector<T>& data);
-	~ArrayData();
+	virtual ~ArrayData();
 
 	void set_data(unsigned data_size, const T* data);
 	void set_data(const std::vector<T>& data);

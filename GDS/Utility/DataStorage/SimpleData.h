@@ -14,7 +14,7 @@ class SimpleData : public IDataStorageObject
 public:
 	SimpleData();
 	SimpleData(const std::string& name, T data);
-	~SimpleData();
+	virtual ~SimpleData();
 
 	void set_data(const T& data);
 	const T& get_data() const;

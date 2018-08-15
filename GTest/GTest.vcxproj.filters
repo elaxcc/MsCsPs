@@ -13,14 +13,14 @@
     <ClCompile Include="..\GDS\Utility\DataStorage\DataStorageCommon.cpp">
       <Filter>Source Files\GDS\DataStorage</Filter>
     </ClCompile>
-    <ClCompile Include="GDS\GDS_DataStorage_Test.cpp">
-      <Filter>Source Files\GDS\DataStorage</Filter>
-    </ClCompile>
     <ClCompile Include="..\GDS\Utility\DataStorage\IDataStorageObject.cpp">
       <Filter>Source Files\GDS\DataStorage</Filter>
     </ClCompile>
     <ClCompile Include="..\GDS\Utility\DataStorage\ObjectData.cpp">
       <Filter>Source Files\GDS\DataStorage</Filter>
+    </ClCompile>
+    <ClCompile Include="GDS\GDS_DataStorage_Test.cpp">
+      <Filter>Source Files\GDS</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
