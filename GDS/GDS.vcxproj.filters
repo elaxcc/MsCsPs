@@ -147,6 +147,9 @@
     <ClCompile Include="Utility\DataStorage\ObjectData.cpp">
       <Filter>Source Files\Utility\DataStorage</Filter>
     </ClCompile>
+    <ClCompile Include="Utility\DataStorage\IDataStorageObject.cpp">
+      <Filter>Source Files\Utility\DataStorage</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stdafx.h">
@@ -225,9 +228,6 @@
       <Filter>Header Files\Utility\DataStorage</Filter>
     </ClInclude>
     <ClInclude Include="Utility\DataStorage\ArrayData.h">
-      <Filter>Header Files\Utility\DataStorage</Filter>
-    </ClInclude>
-    <ClInclude Include="Utility\DataStorage\DataStorageObject.h">
       <Filter>Header Files\Utility\DataStorage</Filter>
     </ClInclude>
     <ClInclude Include="Utility\DataStorage\IDataStorageObject.h">

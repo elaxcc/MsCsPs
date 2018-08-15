@@ -1,7 +1,6 @@
 #pragma once
 
-#include "SimpleData.h"
-#include "ArrayData.h"
+#include "IDataStorageObject.h"
 
 namespace GDS
 {
@@ -9,24 +8,24 @@ namespace GDS
 namespace DataStorage
 {
 
-class ObjectData : public IDataObject
+class ObjectData : public IDataStorageObject
 {
 public:
 	ObjectData();
 	ObjectData(const std::string& name);
 	~ObjectData();
 
-	void set_name(const std::string& name);
-	const std::string& get_name() const;
-
-	bool insert_field();
-
+	bool insert(const IDataStorageObjectPtr& obj);
+	void remove(const IDataStorageObjectPtr& obj);
+	void remove(const std::string& name);
+	template<typename T>
+	T* get(const std::string& name);
 
 	// IDataObject
 	std::vector<unsigned char> serialize();
 
 private:
-	std::string name_;
+	std::map<std::string, IDataStorageObjectPtr> fields_;
 };
 
 } // namespace DataStorage

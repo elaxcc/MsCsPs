@@ -10,6 +10,10 @@
 #include <stdio.h>
 #include <tchar.h>
 #include <iostream>
+#include <list>
+#include <map>
+#include <memory>
+#include <string>
 #include <vector>
 
 #include "gtest/gtest.h"

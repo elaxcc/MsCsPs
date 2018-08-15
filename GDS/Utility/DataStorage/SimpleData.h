@@ -1,6 +1,6 @@
 #pragma once
 
-#include "DataStorageObject.h"
+#include "IDataStorageObject.h"
 
 namespace GDS
 {
@@ -9,7 +9,7 @@ namespace DataStorage
 {
 
 template <typename T>
-class SimpleData : public DataStorageObject<T>
+class SimpleData : public IDataStorageObject
 {
 public:
 	SimpleData();
@@ -20,7 +20,8 @@ public:
 	const T& get_data() const;
 	
 	// IDataStorageObject
-	std::vector<unsigned char> serialize();
+	virtual unsigned get_data_size() const;
+	virtual std::vector<unsigned char> serialize();
 
 private:
 	T data_;
@@ -28,14 +29,14 @@ private:
 
 template<typename T>
 SimpleData<T>::SimpleData()
-	: DataStorageObject(std::string())
+	: IDataStorageObject(std::string())
 {
 
 }
 
 template<typename T>
 SimpleData<T>::SimpleData(const std::string& name, T data)
-	: DataStorageObject<T>(name)
+	: IDataStorageObject(name)
 	, data_(data)
 {
 
@@ -57,6 +58,12 @@ template<typename T>
 const T& SimpleData<T>::get_data() const
 {
 	return data_;
+}
+
+template<typename T>
+unsigned SimpleData<T>::get_data_size() const
+{
+	return sizeof(T);
 }
 
 template<typename T>

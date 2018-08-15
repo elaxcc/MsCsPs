@@ -147,6 +147,7 @@
     </ClCompile>
     <ClCompile Include="Utility\DataStorage\DataStorage.cpp" />
     <ClCompile Include="Utility\DataStorage\DataStorageCommon.cpp" />
+    <ClCompile Include="Utility\DataStorage\IDataStorageObject.cpp" />
     <ClCompile Include="Utility\DataStorage\ObjectData.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -175,7 +176,6 @@
     <ClInclude Include="Utility\DataStorage\SimpleData.h" />
     <ClInclude Include="Utility\DataStorage\DataStorage.h" />
     <ClInclude Include="Utility\DataStorage\DataStorageCommon.h" />
-    <ClInclude Include="Utility\DataStorage\DataStorageObject.h" />
     <ClInclude Include="Utility\Geometry.h" />
     <QtMoc Include="GDS_Wnd.h" />
     <ClInclude Include="stdafx.h" />

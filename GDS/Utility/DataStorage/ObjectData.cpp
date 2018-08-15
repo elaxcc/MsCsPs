@@ -9,12 +9,13 @@ namespace DataStorage
 {
 
 ObjectData::ObjectData()
+	: IDataStorageObject(std::string())
 {
 
 }
 
 ObjectData::ObjectData(const std::string& name)
-	: name_(name)
+	: IDataStorageObject(name)
 {
 
 }
@@ -24,17 +25,30 @@ ObjectData::~ObjectData()
 
 }
 
-void ObjectData::set_name(const std::string& name)
+bool ObjectData::insert(const IDataStorageObjectPtr& obj)
 {
-	name_ = name;
+	std::pair<std::map<std::string, IDataStorageObjectPtr>::iterator, bool> result;
+	result = fields_.insert(std::pair<std::string, IDataStorageObjectPtr>(obj->get_name(), obj));
+
+	return result.second;
 }
 
-const std::string& ObjectData::get_name() const
+void ObjectData::remove(const IDataStorageObjectPtr& obj)
 {
-	return name_;
+	remove(obj->get_name());
 }
 
-// IDataObject
+void ObjectData::remove(const std::string& name)
+{
+	fields_.erase(name);
+}
+
+template<typename T>
+T* ObjectData::get(const std::string& name)
+{
+	return dynamic_cast<T*>(fields_[name].get());
+}
+
 std::vector<unsigned char> ObjectData::serialize()
 {
 	//!fixme

@@ -1,6 +1,6 @@
 #pragma once
 
-#include "DataStorageObject.h"
+#include "IDataStorageObject.h"
 
 namespace GDS
 {
@@ -9,7 +9,7 @@ namespace DataStorage
 {
 
 template<typename T>
-class ArrayData : public DataStorageObject<T>
+class ArrayData : public IDataStorageObject
 {
 public:
 	ArrayData();
@@ -22,7 +22,8 @@ public:
 	const std::vector<T>& get_data() const;
 
 	// IDataStorageObject
-	std::vector<unsigned char> serialize();
+	virtual unsigned get_data_size() const;
+	virtual std::vector<unsigned char> serialize();
 
 private:
 	std::vector<T> data_;
@@ -30,21 +31,21 @@ private:
 
 template<typename T>
 ArrayData<T>::ArrayData()
-	: DataStorageObject(std::string())
+	: IDataStorageObject(std::string())
 {
 
 }
 
 template<typename T>
 ArrayData<T>::ArrayData(std::string name, unsigned data_size, const T* data)
-	: DataStorageObject(name)
+	: IDataStorageObject(name)
 {
 	data_.insert(data_.end(), data, data + data_size);
 }
 
 template<typename T>
 ArrayData<T>::ArrayData(std::string name, const std::vector<T>& data)
-	: DataStorageObject(name)
+	: IDataStorageObject(name)
 {
 	data_.insert(data_.end(), data.begin(), data.end());
 }
@@ -71,6 +72,12 @@ template<typename T>
 const std::vector<T>& ArrayData<T>::get_data() const
 {
 	return data_;
+}
+
+template<typename T>
+unsigned ArrayData<T>::get_data_size() const
+{
+	return sizeof(T);
 }
 
 template<typename T>
