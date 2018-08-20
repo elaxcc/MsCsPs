@@ -22,13 +22,26 @@ ObjectData::ObjectData(const std::string& name)
 
 ObjectData::~ObjectData()
 {
+	std::map<std::string, IDataStorageObject*>::iterator iter = fields_.begin();
+	for (; iter != fields_.end(); ++iter)
+	{
+		if (iter->second != nullptr)
+		{
+			delete iter->second;
+		}
+	}
 	fields_.clear();
 }
 
-bool ObjectData::insert(const IDataStorageObjectPtr& obj)
+bool ObjectData::insert(IDataStorageObject* obj)
 {
-	std::pair<std::map<std::string, IDataStorageObjectPtr>::iterator, bool> result;
-	result = fields_.insert(std::pair<std::string, IDataStorageObjectPtr>(obj->get_name(), obj));
+	if (obj == nullptr)
+	{
+		return false;
+	}
+
+	std::pair<std::map<std::string, IDataStorageObject*>::iterator, bool> result;
+	result = fields_.insert(std::pair<std::string, IDataStorageObject*>(obj->get_name(), obj));
 
 	return result.second;
 }
@@ -40,7 +53,15 @@ void ObjectData::remove(const IDataStorageObject& obj)
 
 void ObjectData::remove(const std::string& name)
 {
-	fields_.erase(name);
+	std::map<std::string, IDataStorageObject*>::iterator elem = fields_.find(name);
+	if (elem != fields_.end())
+	{
+		if (elem->second != nullptr)
+		{
+			delete elem->second;
+		}
+		fields_.erase(elem);
+	}
 }
 
 bool ObjectData::empty()

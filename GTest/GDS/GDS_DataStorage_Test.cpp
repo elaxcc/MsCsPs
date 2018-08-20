@@ -96,17 +96,17 @@ TEST(GDS_DataStorage, ObjectData)
 	SimpleData<char> *simple_data_2 = new SimpleData<char>(simple_data_name_2, simple_data_val_2);
 
 	ObjectData obj_1;
-	obj_1.insert(IDataStorageObjectPtr(simple_data_1));
+	obj_1.insert(simple_data_1);
 	
 	SimpleData<int>* getted_simple_data = obj_1.get<SimpleData<int>>(simple_data_name_1);
 	ASSERT_EQ(simple_data_name_1, getted_simple_data->get_name());
 	ASSERT_EQ(simple_data_val_1, getted_simple_data->get_data());
 
 	simple_data_1 = new SimpleData<int>(simple_data_name_1, simple_data_val_1);
-	bool insert_result = obj_1.insert(std::make_shared<IDataStorageObject>(new SimpleData<char>()));
-	ASSERT_EQ(false, insert_result);
+	bool insert_result = obj_1.insert(new SimpleData<char>());
+	ASSERT_EQ(true, insert_result);
 
-	insert_result = obj_1.insert(IDataStorageObjectPtr(simple_data_2));
+	insert_result = obj_1.insert(simple_data_2);
 	ASSERT_EQ(true, insert_result);
 
 	obj_1.remove(*simple_data_1);
