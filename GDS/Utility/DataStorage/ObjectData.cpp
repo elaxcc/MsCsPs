@@ -39,9 +39,13 @@ bool ObjectData::insert(IDataStorageObject* obj)
 	{
 		return false;
 	}
+	if (obj->get_name().empty())
+	{
+		return false;
+	}
 
 	std::pair<std::map<std::string, IDataStorageObject*>::iterator, bool> result;
-	result = fields_.insert(std::pair<std::string, IDataStorageObject*>(obj->get_name(), obj));
+	result = fields_.insert(std::make_pair(obj->get_name(), obj));
 
 	return result.second;
 }

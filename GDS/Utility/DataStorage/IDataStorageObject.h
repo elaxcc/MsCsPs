@@ -1,5 +1,7 @@
 #pragma once
 
+#include "DataStorageCommon.h"
+
 namespace GDS
 {
 

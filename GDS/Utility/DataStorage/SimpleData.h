@@ -69,8 +69,28 @@ unsigned SimpleData<T>::get_data_size() const
 template<typename T>
 std::vector<unsigned char> SimpleData<T>::serialize()
 {
-	//!fixme
-	return std::vector<unsigned char>();
+	using namespace GDS::DataStorage;
+
+	std::vector<unsigned char> bytes;
+
+	// size
+	unsigned int type_size = sizeof(T);
+	bytes.push_back(type_size);
+	bytes.push_back(cDelimiterStr);
+
+	// name
+	for (char c : get_name())
+		bytes.push_back(c);
+	bytes.push_back(cDelimiterStr);
+	GDS::DataStorage::cDelimiterStr;
+	// data
+	for (unsigned int i = 0; i < type_size; ++i)
+	{
+		unsigned char tmp = *((unsigned char*)(&data_) + i);
+		bytes.push_back(tmp);
+	}
+
+	return bytes;
 }
 
 } // namespace DataStorage
