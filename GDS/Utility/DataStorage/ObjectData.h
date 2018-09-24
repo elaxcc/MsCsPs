@@ -25,6 +25,7 @@ public:
 	// IDataObject
 	virtual unsigned get_data_size() const;
 	virtual std::vector<unsigned char> serialize();
+	virtual IDataStorageObject::Type get_type();
 
 private:
 	std::map<std::string, IDataStorageObject*> fields_;

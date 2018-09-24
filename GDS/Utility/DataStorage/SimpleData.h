@@ -17,11 +17,12 @@ public:
 	virtual ~SimpleData();
 
 	void set_data(const T& data);
-	const T& get_data() const;
+	T& get_data();
 	
 	// IDataStorageObject
 	virtual unsigned get_data_size() const;
 	virtual std::vector<unsigned char> serialize();
+	virtual IDataStorageObject::Type get_type();
 
 private:
 	T data_;
@@ -55,7 +56,7 @@ void SimpleData<T>::set_data(const T& data)
 }
 
 template<typename T>
-const T& SimpleData<T>::get_data() const
+T& SimpleData<T>::get_data()
 {
 	return data_;
 }
@@ -91,6 +92,12 @@ std::vector<unsigned char> SimpleData<T>::serialize()
 	}
 
 	return bytes;
+}
+
+template<typename T>
+IDataStorageObject::Type SimpleData<T>::get_type()
+{
+	return IDataStorageObject::TypeSimple;
 }
 
 } // namespace DataStorage

@@ -84,6 +84,11 @@ std::vector<unsigned char> ObjectData::serialize()
 	return std::vector<unsigned char>();
 }
 
+IDataStorageObject::Type ObjectData::get_type()
+{
+	return IDataStorageObject::TypeObject;
+}
+
 } // namespace DataStorage
 
 } // namespace GDS
