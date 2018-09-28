@@ -14,6 +14,8 @@ const std::string cDataStorageHeaderStr = "GDS file storage format" + cDataStora
 const unsigned char cDelimiterStr = ':';
 const unsigned char cFirstBracketStr = '[';
 const unsigned char cLastBracketStr = ']';
+const unsigned char cFirstObjBracketStr = '{';
+const unsigned char cLastObjBracketStr = '}';
 
 } // namespace DataStorage
 

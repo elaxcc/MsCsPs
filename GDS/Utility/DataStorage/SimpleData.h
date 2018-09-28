@@ -21,8 +21,12 @@ public:
 	
 	// IDataStorageObject
 	virtual unsigned get_data_size() const;
-	virtual std::vector<unsigned char> serialize();
 	virtual IDataStorageObject::Type get_type();
+	virtual void serialize_head(std::vector<unsigned char>& bytes);
+	virtual void serialize_data(std::vector<unsigned char>& bytes);
+
+	SimpleData<T>& operator= (const T& l);
+	SimpleData<T>& operator= (SimpleData<T>& l);
 
 private:
 	T data_;
@@ -68,36 +72,50 @@ unsigned SimpleData<T>::get_data_size() const
 }
 
 template<typename T>
-std::vector<unsigned char> SimpleData<T>::serialize()
+void SimpleData<T>::serialize_head(std::vector<unsigned char>& bytes)
 {
-	using namespace GDS::DataStorage;
-
-	std::vector<unsigned char> bytes;
-
-	// size
-	unsigned int type_size = sizeof(T);
-	bytes.push_back(type_size);
+	// type
+	bytes.push_back(sizeof(T));
 	bytes.push_back(cDelimiterStr);
 
 	// name
 	for (char c : get_name())
+	{
 		bytes.push_back(c);
+	}
 	bytes.push_back(cDelimiterStr);
-	GDS::DataStorage::cDelimiterStr;
+}
+
+template<typename T>
+void SimpleData<T>::serialize_data(std::vector<unsigned char>& bytes)
+{
 	// data
-	for (unsigned int i = 0; i < type_size; ++i)
+	for (unsigned int i = 0; i < sizeof(T); ++i)
 	{
 		unsigned char tmp = *((unsigned char*)(&data_) + i);
 		bytes.push_back(tmp);
 	}
-
-	return bytes;
 }
 
 template<typename T>
 IDataStorageObject::Type SimpleData<T>::get_type()
 {
 	return IDataStorageObject::TypeSimple;
+}
+
+template<typename T>
+SimpleData<T>& SimpleData<T>::operator= (const T& l)
+{
+	this->data_ = l;
+	return *this;
+}
+
+template<typename T>
+SimpleData<T>& SimpleData<T>::operator= (SimpleData<T>& l)
+{
+	this->data_ = l.get_data();
+	this->set_name(l.get_name());
+	return *this;
 }
 
 } // namespace DataStorage
