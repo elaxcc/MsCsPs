@@ -66,7 +66,7 @@ TEST(GDS_DataStorage, ArrayData)
 	typedef char NotTestedType;
 
 	std::string name("array_data");
-	SimpleData<TestedType> *data = new SimpleData<TestedType> [5];
+	SimpleData<TestedType> data[5];
 	for (unsigned i = 0; i < 5; ++i)
 	{
 		data[i].set_data(i + 1);
@@ -74,13 +74,13 @@ TEST(GDS_DataStorage, ArrayData)
 	std::vector<SimpleData<TestedType>> vec_data(data, data + 5);
 	
 	std::string not_name("not_array_data");
-	SimpleData<TestedType> *not_data = new SimpleData<TestedType> [5];
+	SimpleData<TestedType> not_data[5];
 	for (unsigned i = 0; i < 5; ++i)
 	{
 		not_data[i].set_data(1);
 	}
 	std::vector<SimpleData<TestedType>> not_vec_data(not_data, not_data + 5);
-
+	
 	ArrayData<SimpleData<TestedType>> array_data_1;
 	array_data_1.set_name(name);
 	array_data_1.set_data(data, 5);
@@ -89,14 +89,14 @@ TEST(GDS_DataStorage, ArrayData)
 	bool result = false;
 	for (unsigned i = 0; i < array_data_1.get_size(); ++i)
 	{
-		result = array_data_1.get_data()[i].get_data() == data[i].get_data();
+		result = array_data_1[i].get_data() == data[i].get_data();
 	}
 	ASSERT_TRUE(result);
 	ASSERT_NE(not_name, array_data_1.get_name());
 	ASSERT_NE(sizeof(NotTestedType), array_data_1.get_data_size());
 	for (unsigned i = 0; i < array_data_1.get_size(); ++i)
 	{
-		result = array_data_1.get_data()[i].get_data() == not_data[i].get_data();
+		result = array_data_1[i].get_data() == not_data[i].get_data();
 	}
 	ASSERT_FALSE(result);
 	
@@ -105,12 +105,12 @@ TEST(GDS_DataStorage, ArrayData)
 	array_data_2.set_data(vec_data);
 	for (unsigned i = 0; i < array_data_2.get_size(); ++i)
 	{
-		result = array_data_2.get_data()[i].get_data() == data[i].get_data();
+		result = array_data_2[i].get_data() == data[i].get_data();
 	}
 	ASSERT_TRUE(result);
 	for (unsigned i = 0; i < array_data_2.get_size(); ++i)
 	{
-		result = array_data_2.get_data()[i].get_data() == not_data[i].get_data();
+		result = array_data_2[i].get_data() == not_data[i].get_data();
 	}
 	ASSERT_FALSE(result);
 	
@@ -119,26 +119,26 @@ TEST(GDS_DataStorage, ArrayData)
 	ASSERT_EQ(sizeof(TestedType), array_data_3.get_data_size());
 	for (unsigned i = 0; i < array_data_3.get_size(); ++i)
 	{
-		result = array_data_3.get_data()[i].get_data() == data[i].get_data();
+		result = array_data_3[i].get_data() == data[i].get_data();
 	}
 	ASSERT_TRUE(result);
 	ASSERT_NE(not_name, array_data_3.get_name());
 	ASSERT_NE(sizeof(NotTestedType), array_data_3.get_data_size());
 	for (unsigned i = 0; i < array_data_3.get_size(); ++i)
 	{
-		result = array_data_3.get_data()[i].get_data() == not_data[i].get_data();
+		result = array_data_3[i].get_data() == not_data[i].get_data();
 	}
 	ASSERT_FALSE(result);
 	
 	ArrayData<SimpleData<TestedType>> array_data_4(name, vec_data);
 	for (unsigned i = 0; i < array_data_4.get_size(); ++i)
 	{
-		result = array_data_4.get_data()[i].get_data() == data[i].get_data();
+		result = array_data_4[i].get_data() == data[i].get_data();
 	}
 	ASSERT_TRUE(result);
 	for (unsigned i = 0; i < array_data_4.get_size(); ++i)
 	{
-		result = array_data_4.get_data()[i].get_data() == not_data[i].get_data();
+		result = array_data_4[i].get_data() == not_data[i].get_data();
 	}
 	ASSERT_FALSE(result);
 	
@@ -162,8 +162,15 @@ TEST(GDS_DataStorage, ArrayData)
 	ASSERT_EQ(true, comparison_result);
 	
 	// Object data
-
+	/*
+	ObjectData obj[2];
+	obj[0].insert(new SimpleData<char>("s1", 'a'));
+	obj[1].insert(new SimpleData<char>("s2", 'b'));
 	
+	ArrayData<ObjectData> obj_arr("obj_arr", obj, 2);
+	serialized_data = obj[0].serialize();
+
+	*/
 }
 
 TEST(GDS_DataStorage, ObjectData)
@@ -174,36 +181,37 @@ TEST(GDS_DataStorage, ObjectData)
 	
 	std::string simple_data_name_1 = "simple_data_1";
 	int simple_data_val_1 = 12345;
-	SimpleData<int> *simple_data_1 = new SimpleData<int>(simple_data_name_1, simple_data_val_1);
+	SimpleData<int> simple_data_1(simple_data_name_1, simple_data_val_1);
 
 	std::string simple_data_name_2 = "simple_data_2";
 	char simple_data_val_2 = 'D';
-	SimpleData<char> *simple_data_2 = new SimpleData<char>(simple_data_name_2, simple_data_val_2);
+	SimpleData<char> simple_data_2(simple_data_name_2, simple_data_val_2);
 
 	ObjectData obj_1;
-	obj_1.insert(simple_data_1);
+	obj_1.insert<SimpleData<int>>(simple_data_1);
 	
-	SimpleData<int>* getted_simple_data = obj_1.get<SimpleData<int>>(simple_data_name_1);
+	SimpleData<int> *getted_simple_data = obj_1.get<SimpleData<int>>(simple_data_name_1);
 	ASSERT_EQ(simple_data_name_1, getted_simple_data->get_name());
 	ASSERT_EQ(simple_data_val_1, getted_simple_data->get_data());
 	
 	// insert element with existing name
-	simple_data_1 = new SimpleData<int>(simple_data_name_1, 999);
+	simple_data_1.set_data(999);
 	bool insert_result = obj_1.insert(simple_data_1);
 	ASSERT_EQ(false, insert_result);
-
+	
 	// insert second element
 	insert_result = obj_1.insert(simple_data_2);
 	ASSERT_EQ(true, insert_result);
-
+	
 	// insert null name element
-	insert_result = obj_1.insert(new SimpleData<double>());
+	SimpleData<double> empty_ddata;
+	insert_result = obj_1.insert(empty_ddata);
 	ASSERT_EQ(false, insert_result);
-
+	
 	// remove first and last elements
-	obj_1.remove(*simple_data_1);
+	obj_1.remove(simple_data_1);
 	ASSERT_EQ(false, obj_1.empty());
-	obj_1.remove(*simple_data_2);
+	obj_1.remove(simple_data_2);
 	ASSERT_EQ(true, obj_1.empty());
 
 	// array data functionality test
@@ -213,26 +221,27 @@ TEST(GDS_DataStorage, ObjectData)
 	array_data[0] = 'a';
 	array_data[1] = 'b';
 	array_data[2] = 'c';
-	ArrayData<SimpleData<char>> *array_obj = new ArrayData<SimpleData<char>>(array_name, array_data, 3);
+	ArrayData<SimpleData<char>> array_obj(array_name, array_data, 3);
 	
 	ObjectData obj_2("obj_2");
 	insert_result = obj_2.insert(array_obj);
 	ASSERT_EQ(true, insert_result);
 	
 	ArrayData<SimpleData<char>> *getted_array_data = obj_2.get<ArrayData<SimpleData<char>>>(array_name);
-	ASSERT_EQ(array_obj, getted_array_data);
-	ASSERT_EQ(array_obj->get_size(), getted_array_data->get_size());
-	ASSERT_EQ((*array_obj)[0].get_data(), (*getted_array_data)[0].get_data());
-	ASSERT_EQ((*array_obj)[1].get_data(), (*getted_array_data)[1].get_data());
-	ASSERT_EQ((*array_obj)[2].get_data(), (*getted_array_data)[2].get_data());
+	ASSERT_EQ(array_obj.get_size(), getted_array_data->get_size());
+	ASSERT_EQ(array_obj[0].get_data(), (*getted_array_data)[0].get_data());
+	ASSERT_EQ(array_obj[1].get_data(), (*getted_array_data)[1].get_data());
+	ASSERT_EQ(array_obj[2].get_data(), (*getted_array_data)[2].get_data());
 	
-	obj_2.clean();
+	obj_2.erase();
 	ASSERT_EQ(true, obj_2.empty());
 
-	obj_2.insert(new SimpleData<char>(std::string("smpl"), 'D'));
+	SimpleData<char> simp_char(std::string("smpl"), 'D');
+	obj_2.insert(simp_char);
 	SimpleData<char> arr_data[1];
 	arr_data[0] = 'a';
-	obj_2.insert(new ArrayData<SimpleData<char>>("arr", arr_data, 1));
+	ArrayData<SimpleData<char>> arr_char("arr", arr_data, 1);
+	obj_2.insert(arr_char);
 
 	std::vector<unsigned char> expected_serialized_data = 
 		{ 0x00, ':', 'o', 'b', 'j', '_', '2', 
@@ -243,5 +252,10 @@ TEST(GDS_DataStorage, ObjectData)
 	std::vector<unsigned char> serialized_data = obj_2.serialize();
 	bool comparison_result = std::equal(expected_serialized_data.begin(), expected_serialized_data.end(), serialized_data.begin());
 	ASSERT_EQ(true, comparison_result);
+
+	// check operator[]
+	
+	SimpleData<char> *simple_ptr = obj_2.get<SimpleData<char>>("smpl");
+	ASSERT_EQ('D', simple_ptr->get_data());
 }
 

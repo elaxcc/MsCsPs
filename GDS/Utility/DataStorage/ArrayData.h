@@ -19,7 +19,7 @@ public:
 
 	void set_data(T* data, unsigned data_size);
 	void set_data(const std::vector<T>& data);
-	std::vector<T>& get_data();
+	const std::vector<T>& get_data() const;
 	unsigned get_size();
 
 	T& operator[] (int index);
@@ -80,7 +80,7 @@ void ArrayData<T>::set_data(const std::vector<T>& data)
 }
 
 template <typename T>
-std::vector<T>& ArrayData<T>::get_data()
+const std::vector<T>& ArrayData<T>::get_data() const
 {
 	return data_;
 }

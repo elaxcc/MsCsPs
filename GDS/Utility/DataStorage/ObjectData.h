@@ -15,11 +15,12 @@ public:
 	ObjectData(const std::string& name);
 	virtual ~ObjectData();
 
-	bool insert(IDataStorageObject* obj);
+	template<typename T>
+	bool insert(const T& obj);
 	void remove(const IDataStorageObject& obj);
 	void remove(const std::string& name);
 	bool empty();
-	void clean();
+	void erase();
 	template<typename T>
 	T* get(const std::string& name);
 
@@ -32,8 +33,25 @@ public:
 	IDataStorageObject* operator[] (std::string field_name);
 
 private:
+	std::string name_;
 	std::map<std::string, IDataStorageObject*> fields_;
 };
+
+template <typename T>
+bool ObjectData::insert(const T& obj)
+{
+	if (obj.get_name().empty())
+	{
+		return false;
+	}
+
+	T *copied_obj = new T(obj);
+
+	std::pair<std::map<std::string, IDataStorageObject*>::iterator, bool> result;
+	result = fields_.insert(std::make_pair(obj.get_name(), copied_obj));
+
+	return result.second;
+}
 
 template<typename T>
 T* ObjectData::get(const std::string& name)
