@@ -13,6 +13,7 @@ class SimpleData : public IDataStorageObject
 {
 public:
 	SimpleData();
+	SimpleData(const SimpleData<T>& obj);
 	SimpleData(const std::string& name, T data);
 	virtual ~SimpleData();
 
@@ -24,6 +25,7 @@ public:
 	virtual IDataStorageObject::Type get_type();
 	virtual void serialize_head(std::vector<unsigned char>& bytes);
 	virtual void serialize_data(std::vector<unsigned char>& bytes);
+	virtual IDataStorageObjectPtr clone() const;
 
 	SimpleData<T>& operator= (const T& l);
 	SimpleData<T>& operator= (SimpleData<T>& l);
@@ -35,6 +37,15 @@ private:
 template<typename T>
 SimpleData<T>::SimpleData()
 	: IDataStorageObject(std::string())
+{
+
+}
+
+
+template<typename T>
+SimpleData<T>::SimpleData(const SimpleData<T>& obj)
+	: IDataStorageObject(obj.get_name())
+	, data_(obj.data_)
 {
 
 }
@@ -95,6 +106,13 @@ void SimpleData<T>::serialize_data(std::vector<unsigned char>& bytes)
 		unsigned char tmp = *((unsigned char*)(&data_) + i);
 		bytes.push_back(tmp);
 	}
+}
+
+template<typename T>
+IDataStorageObjectPtr SimpleData<T>::clone() const
+{
+	SimpleData<T> *simple = new SimpleData<T>(get_name(), data_);
+	return IDataStorageObjectPtr(simple);
 }
 
 template<typename T>

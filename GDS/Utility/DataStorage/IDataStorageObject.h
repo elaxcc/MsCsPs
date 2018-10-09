@@ -8,6 +8,9 @@ namespace GDS
 namespace DataStorage
 {
 
+class IDataStorageObject;
+typedef std::shared_ptr<IDataStorageObject> IDataStorageObjectPtr;
+
 class IDataStorageObject
 {
 public:
@@ -29,11 +32,11 @@ public:
 	std::vector<unsigned char> serialize();
 	virtual void serialize_head(std::vector<unsigned char>& bytes) = 0;
 	virtual void serialize_data(std::vector<unsigned char>& bytes) = 0;
+	virtual IDataStorageObjectPtr clone() const = 0;
 
 private:
 	std::string name_;
 };
-typedef std::shared_ptr<IDataStorageObject> IDataStorageObjectPtr;
 
 } // namespace DataStorage
 

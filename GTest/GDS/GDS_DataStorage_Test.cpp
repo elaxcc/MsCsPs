@@ -54,6 +54,12 @@ TEST(GDS_DataStorage, SimpleData)
 	simple_1 = simple_2;
 	ASSERT_EQ(simple_2.get_name(), simple_1.get_name());
 	ASSERT_EQ(simple_2.get_data(), simple_1.get_data());
+
+	IDataStorageObjectPtr iptr = simple_1.clone();
+	SimpleData<int> *ptr = static_cast<SimpleData<int>*>(iptr.get());
+	ptr->set_name("new name");
+	ASSERT_NE(ptr->get_name(), simple_1.get_name());
+	ASSERT_EQ(ptr->get_data(), simple_1.get_data());
 }
 
 TEST(GDS_DataStorage, ArrayData)
@@ -81,7 +87,7 @@ TEST(GDS_DataStorage, ArrayData)
 	}
 	std::vector<SimpleData<TestedType>> not_vec_data(not_data, not_data + 5);
 	
-	ArrayData<SimpleData<TestedType>> array_data_1;
+	ArrayData<SimpleData<TestedType>> array_data_1(5);
 	array_data_1.set_name(name);
 	array_data_1.set_data(data, 5);
 	ASSERT_EQ(name, array_data_1.get_name());
@@ -100,7 +106,7 @@ TEST(GDS_DataStorage, ArrayData)
 	}
 	ASSERT_FALSE(result);
 	
-	ArrayData<SimpleData<TestedType>> array_data_2;
+	ArrayData<SimpleData<TestedType>> array_data_2(vec_data.size());
 	array_data_2.set_name(name);
 	array_data_2.set_data(vec_data);
 	for (unsigned i = 0; i < array_data_2.get_size(); ++i)
@@ -161,16 +167,27 @@ TEST(GDS_DataStorage, ArrayData)
 	comparison_result = std::equal(expected_serialized_data.begin(), expected_serialized_data.end(), serialized_data.begin());
 	ASSERT_EQ(true, comparison_result);
 	
-	// Object data
-	/*
-	ObjectData obj[2];
-	obj[0].insert(new SimpleData<char>("s1", 'a'));
-	obj[1].insert(new SimpleData<char>("s2", 'b'));
-	
-	ArrayData<ObjectData> obj_arr("obj_arr", obj, 2);
-	serialized_data = obj[0].serialize();
+	// Object data	
+	ObjectData obj[3];
+	obj[0].insert<SimpleData<char>>(SimpleData<char>("s1", 'a'));
+	obj[1].insert<SimpleData<char>>(SimpleData<char>("s2", 'b'));
+	obj[2].insert<SimpleData<char>>(SimpleData<char>("s3", 'c'));
+	ArrayData<ObjectData> obj_arr("obj_arr", obj, 3);
+	serialized_data = obj_arr.serialize();
 
-	*/
+	std::vector<unsigned char> expected_arr_str =
+		{ 0x00, ':', 'o', 'b', 'j', '_', 'a', 'r', 'r', '[', 0x03, 0x00, 0x00, 0x00, ']', ':'
+		, '{'
+		, 0x01, ':', 's', '1', ':', 'a'
+		, '}'
+		, '{'
+		, 0x01, ':', 's', '2', ':', 'b'
+		, '}'
+		, '{'
+		, 0x01, ':', 's', '3', ':', 'c'
+		, '}' };
+	comparison_result = std::equal(expected_arr_str.begin(), expected_arr_str.end(), serialized_data.begin());
+	ASSERT_EQ(true, comparison_result);
 }
 
 TEST(GDS_DataStorage, ObjectData)
@@ -248,14 +265,23 @@ TEST(GDS_DataStorage, ObjectData)
 		'{', 
 			0x01, ':', 'a', 'r', 'r', '[', 0x01, 0x00, 0x00, 0x00, ']', ':', 'a',
 			0x01, ':', 's', 'm', 'p', 'l', ':', 'D',
-		'}'};
+		'}' };
 	std::vector<unsigned char> serialized_data = obj_2.serialize();
-	bool comparison_result = std::equal(expected_serialized_data.begin(), expected_serialized_data.end(), serialized_data.begin());
+	bool comparison_result = std::equal(expected_serialized_data.begin(),
+		expected_serialized_data.end(), serialized_data.begin());
+	ASSERT_EQ(true, comparison_result);
+
+	// clone
+	IDataStorageObjectPtr iptr = obj_2.clone();
+	std::vector<unsigned char> iptr_serialized_data = iptr->serialize();
+	comparison_result = std::equal(expected_serialized_data.begin(),
+		expected_serialized_data.end(), iptr_serialized_data.begin());
 	ASSERT_EQ(true, comparison_result);
 
 	// check operator[]
 	
-	SimpleData<char> *simple_ptr = obj_2.get<SimpleData<char>>("smpl");
-	ASSERT_EQ('D', simple_ptr->get_data());
+	IDataStorageObjectPtr simple_ptr = obj_2["arr"];
+	ASSERT_EQ(arr_char.get_name(), simple_ptr->get_name());
+	
 }
 

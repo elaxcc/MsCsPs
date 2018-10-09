@@ -12,6 +12,7 @@ class ObjectData : public IDataStorageObject
 {
 public:
 	ObjectData();
+	ObjectData(const ObjectData& obj);
 	ObjectData(const std::string& name);
 	virtual ~ObjectData();
 
@@ -29,12 +30,12 @@ public:
 	virtual IDataStorageObject::Type get_type();
 	virtual void serialize_head(std::vector<unsigned char>& bytes);
 	virtual void serialize_data(std::vector<unsigned char>& bytes);
+	virtual IDataStorageObjectPtr clone() const;
 
-	IDataStorageObject* operator[] (std::string field_name);
+	IDataStorageObjectPtr operator[] (std::string field_name);
 
 private:
-	std::string name_;
-	std::map<std::string, IDataStorageObject*> fields_;
+	std::map<std::string, IDataStorageObjectPtr> fields_;
 };
 
 template <typename T>
@@ -45,10 +46,11 @@ bool ObjectData::insert(const T& obj)
 		return false;
 	}
 
-	T *copied_obj = new T(obj);
+	IDataStorageObjectPtr copied_obj = obj.clone();
 
-	std::pair<std::map<std::string, IDataStorageObject*>::iterator, bool> result;
-	result = fields_.insert(std::make_pair(obj.get_name(), copied_obj));
+	std::pair<std::map<std::string, IDataStorageObjectPtr>::iterator, bool> result;
+	result = fields_.insert(
+		std::pair<std::string, IDataStorageObjectPtr>(obj.get_name(), copied_obj));
 
 	return result.second;
 }
@@ -56,10 +58,11 @@ bool ObjectData::insert(const T& obj)
 template<typename T>
 T* ObjectData::get(const std::string& name)
 {
-	std::map<std::string, IDataStorageObject*>::iterator iter = fields_.find(name);
+	std::map<std::string, IDataStorageObjectPtr>::iterator iter = fields_.find(name);
 	if (iter != fields_.end())
 	{
-		return (dynamic_cast<T*>(iter->second));
+		IDataStorageObjectPtr iptr = iter->second;
+		return (static_cast<T*>(iptr.get()));
 	}
 	return nullptr;
 }

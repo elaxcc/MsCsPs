@@ -12,7 +12,7 @@ template <typename T>
 class ArrayData : public IDataStorageObject
 {
 public:
-	ArrayData();
+	ArrayData(unsigned data_size);
 	ArrayData(const std::string& name, T* data, unsigned data_size);
 	ArrayData(const std::string& name, const std::vector<T>& data);
 	virtual ~ArrayData();
@@ -29,14 +29,16 @@ public:
 	virtual IDataStorageObject::Type get_type();
 	virtual void serialize_head(std::vector<unsigned char>& bytes);
 	virtual void serialize_data(std::vector<unsigned char>& bytes);
+	virtual IDataStorageObjectPtr clone() const;
 
 private:
 	std::vector<T> data_;
 };
 
 template <typename T>
-ArrayData<T>::ArrayData()
+ArrayData<T>::ArrayData(unsigned data_size)
 	: IDataStorageObject(std::string())
+	, data_(data_size)
 {
 
 }
@@ -44,18 +46,24 @@ ArrayData<T>::ArrayData()
 template <typename T>
 ArrayData<T>::ArrayData(const std::string& name, T* data, unsigned data_size)
 	: IDataStorageObject(name)
+	, data_(data_size)
 {
 	for (unsigned i = 0; i < data_size; ++i)
 	{
-		data_.push_back(data[i]);
+		data_[i] = data[i];
 	}
 }
 
 template <typename T>
 ArrayData<T>::ArrayData(const std::string& name, const std::vector<T>& data)
 	: IDataStorageObject(name)
+	, data_(data.size())
 {
-	data_.insert(data_.end(), data.begin(), data.end());
+	for (unsigned i = 0; i < data_.size(); ++i)
+	{
+		T tmp = data[i];
+		data_[i] = tmp;
+	}
 }
 
 template <typename T>
@@ -69,14 +77,18 @@ void ArrayData<T>::set_data(T* data, unsigned data_size)
 {
 	for (unsigned i = 0; i < data_size; ++i)
 	{
-		data_.push_back(data[i]);
+		data_[i] = data[i];
 	}
 }
 
 template <typename T>
 void ArrayData<T>::set_data(const std::vector<T>& data)
 {
-	data_.insert(data_.end(), data.begin(), data.end());
+	for (unsigned i = 0; i < data_.size(); ++i)
+	{
+		T tmp = data[i];
+		data_[i] = tmp;
+	}
 }
 
 template <typename T>
@@ -141,6 +153,13 @@ void ArrayData<T>::serialize_data(std::vector<unsigned char>& bytes)
 	{
 		data_[i].serialize_data(bytes);
 	}
+}
+
+template<typename T>
+IDataStorageObjectPtr ArrayData<T>::clone() const
+{
+	ArrayData<T> *ptr = new ArrayData<T>(get_name(), data_);
+	return IDataStorageObjectPtr(ptr);
 }
 
 template <typename T>

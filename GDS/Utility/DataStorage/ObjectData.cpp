@@ -14,6 +14,17 @@ ObjectData::ObjectData()
 
 }
 
+ObjectData::ObjectData(const ObjectData& obj)
+	: IDataStorageObject(obj.get_name())
+{
+	this->erase();
+	for (auto d : obj.fields_)
+	{
+		std::pair<std::string, IDataStorageObjectPtr> pair(d.first, d.second->clone());
+		this->fields_.insert(pair);
+	}
+}
+
 ObjectData::ObjectData(const std::string& name)
 	: IDataStorageObject(name)
 {
@@ -32,13 +43,9 @@ void ObjectData::remove(const IDataStorageObject& obj)
 
 void ObjectData::remove(const std::string& name)
 {
-	std::map<std::string, IDataStorageObject*>::iterator elem = fields_.find(name);
+	std::map<std::string, IDataStorageObjectPtr>::iterator elem = fields_.find(name);
 	if (elem != fields_.end())
 	{
-		if (elem->second != nullptr)
-		{
-			delete elem->second;
-		}
 		fields_.erase(elem);
 	}
 }
@@ -50,14 +57,6 @@ bool ObjectData::empty()
 
 void ObjectData::erase()
 {
-	std::map<std::string, IDataStorageObject*>::iterator iter = fields_.begin();
-	for (; iter != fields_.end(); ++iter)
-	{
-		if (iter->second != nullptr)
-		{
-			delete iter->second;
-		}
-	}
 	fields_.clear();
 }
 
@@ -99,14 +98,25 @@ void ObjectData::serialize_data(std::vector<unsigned char>& bytes)
 	bytes.push_back(cLastObjBracketStr);
 }
 
-IDataStorageObject* ObjectData::operator[] (std::string field_name)
+IDataStorageObjectPtr ObjectData::clone() const
+{
+	ObjectData *obj = new ObjectData(get_name());
+	for (auto field : fields_)
+	{
+		obj->insert<IDataStorageObject>(*(field.second));
+	}
+
+	return IDataStorageObjectPtr(obj);
+}
+
+IDataStorageObjectPtr ObjectData::operator[] (std::string field_name)
 {
 	auto result = fields_.find(field_name);
 	if (result != fields_.end())
 	{
 		return result->second;
 	}
-	return nullptr;
+	return IDataStorageObjectPtr();
 }
 
 } // namespace DataStorage
