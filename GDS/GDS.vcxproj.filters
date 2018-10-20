@@ -138,9 +138,6 @@
     <ClCompile Include="QtLibrary\QtLibWnd.cpp">
       <Filter>Source Files\QtLibrary</Filter>
     </ClCompile>
-    <ClCompile Include="Utility\DataStorage\DataStorage.cpp">
-      <Filter>Source Files\Utility\DataStorage</Filter>
-    </ClCompile>
     <ClCompile Include="Utility\DataStorage\DataStorageCommon.cpp">
       <Filter>Source Files\Utility\DataStorage</Filter>
     </ClCompile>
@@ -148,6 +145,12 @@
       <Filter>Source Files\Utility\DataStorage</Filter>
     </ClCompile>
     <ClCompile Include="Utility\DataStorage\IDataStorageObject.cpp">
+      <Filter>Source Files\Utility\DataStorage</Filter>
+    </ClCompile>
+    <ClCompile Include="Utility\DataStorage\File.cpp">
+      <Filter>Source Files\Utility\DataStorage</Filter>
+    </ClCompile>
+    <ClCompile Include="Utility\DataStorage\Parser.cpp">
       <Filter>Source Files\Utility\DataStorage</Filter>
     </ClCompile>
   </ItemGroup>
@@ -215,9 +218,6 @@
     <ClInclude Include="Utility\Geometry.h">
       <Filter>Header Files\Utility</Filter>
     </ClInclude>
-    <ClInclude Include="Utility\DataStorage\DataStorage.h">
-      <Filter>Header Files\Utility\DataStorage</Filter>
-    </ClInclude>
     <ClInclude Include="Utility\DataStorage\DataStorageCommon.h">
       <Filter>Header Files\Utility\DataStorage</Filter>
     </ClInclude>
@@ -231,6 +231,12 @@
       <Filter>Header Files\Utility\DataStorage</Filter>
     </ClInclude>
     <ClInclude Include="Utility\DataStorage\IDataStorageObject.h">
+      <Filter>Header Files\Utility\DataStorage</Filter>
+    </ClInclude>
+    <ClInclude Include="Utility\DataStorage\File.h">
+      <Filter>Header Files\Utility\DataStorage</Filter>
+    </ClInclude>
+    <ClInclude Include="Utility\DataStorage\Parser.h">
       <Filter>Header Files\Utility\DataStorage</Filter>
     </ClInclude>
   </ItemGroup>

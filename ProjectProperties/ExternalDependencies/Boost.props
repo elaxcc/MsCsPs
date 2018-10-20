@@ -1,0 +1,33 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ImportGroup Label="PropertySheets" />
+  <PropertyGroup Label="UserMacros">
+    <boost_version>1_68_0</boost_version>
+    <boost_dir>../../Thirdparty/boost_$(boost_version)</boost_dir>
+    <boost_include_dir>$(boost_dir)/</boost_include_dir>
+    <boost_lib_dir>$(boost_dir)/stage/lib</boost_lib_dir>
+  </PropertyGroup>
+  <PropertyGroup />
+  <ItemDefinitionGroup>
+    <ClCompile>
+      <AdditionalIncludeDirectories>$(boost_include_dir);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ClCompile>
+    <Link>
+      <AdditionalLibraryDirectories>$(boost_lib_dir);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <BuildMacro Include="boost_version">
+      <Value>$(boost_version)</Value>
+    </BuildMacro>
+    <BuildMacro Include="boost_dir">
+      <Value>$(boost_dir)</Value>
+    </BuildMacro>
+    <BuildMacro Include="boost_include_dir">
+      <Value>$(boost_include_dir)</Value>
+    </BuildMacro>
+    <BuildMacro Include="boost_lib_dir">
+      <Value>$(boost_lib_dir)</Value>
+    </BuildMacro>
+  </ItemGroup>
+</Project>

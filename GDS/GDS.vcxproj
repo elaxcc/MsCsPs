@@ -44,10 +44,12 @@
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
     <Import Project="..\ProjectProperties\Common\Common.props" />
+    <Import Project="..\ProjectProperties\ExternalDependencies\ExternalD.props" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
     <Import Project="..\ProjectProperties\Common\Common.props" />
+    <Import Project="..\ProjectProperties\ExternalDependencies\External.props" />
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
@@ -145,8 +147,9 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
     </ClCompile>
-    <ClCompile Include="Utility\DataStorage\DataStorage.cpp" />
+    <ClCompile Include="Utility\DataStorage\Parser.cpp" />
     <ClCompile Include="Utility\DataStorage\DataStorageCommon.cpp" />
+    <ClCompile Include="Utility\DataStorage\File.cpp" />
     <ClCompile Include="Utility\DataStorage\IDataStorageObject.cpp" />
     <ClCompile Include="Utility\DataStorage\ObjectData.cpp" />
   </ItemGroup>
@@ -171,10 +174,11 @@
     <ClInclude Include="QtLibrary\QtLibElement.h" />
     <ClInclude Include="QtLibrary\QtLibWnd.h" />
     <ClInclude Include="Utility\DataStorage\ArrayData.h" />
+    <ClInclude Include="Utility\DataStorage\File.h" />
     <ClInclude Include="Utility\DataStorage\IDataStorageObject.h" />
     <ClInclude Include="Utility\DataStorage\ObjectData.h" />
     <ClInclude Include="Utility\DataStorage\SimpleData.h" />
-    <ClInclude Include="Utility\DataStorage\DataStorage.h" />
+    <ClInclude Include="Utility\DataStorage\Parser.h" />
     <ClInclude Include="Utility\DataStorage\DataStorageCommon.h" />
     <ClInclude Include="Utility\Geometry.h" />
     <QtMoc Include="GDS_Wnd.h" />

@@ -3,6 +3,7 @@
   <ImportGroup Label="PropertySheets">
     <Import Project="GTestCommon.props" />
     <Import Project="GTestD.props" />
+    <Import Project="Boost.props" />
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup />

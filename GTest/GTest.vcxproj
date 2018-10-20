@@ -155,7 +155,6 @@
     <ClInclude Include="targetver.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\GDS\Utility\DataStorage\DataStorage.cpp" />
     <ClCompile Include="..\GDS\Utility\DataStorage\DataStorageCommon.cpp" />
     <ClCompile Include="..\GDS\Utility\DataStorage\IDataStorageObject.cpp" />
     <ClCompile Include="..\GDS\Utility\DataStorage\ObjectData.cpp" />

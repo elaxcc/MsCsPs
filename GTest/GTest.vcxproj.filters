@@ -7,9 +7,6 @@
     <ClCompile Include="stdafx.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\GDS\Utility\DataStorage\DataStorage.cpp">
-      <Filter>Source Files\GDS\DataStorage</Filter>
-    </ClCompile>
     <ClCompile Include="..\GDS\Utility\DataStorage\DataStorageCommon.cpp">
       <Filter>Source Files\GDS\DataStorage</Filter>
     </ClCompile>
