@@ -27,8 +27,8 @@ public:
 	// IDataStorageObject
 	virtual unsigned get_data_size() const;
 	virtual IDataStorageObject::Type get_type();
-	virtual void serialize_head(std::vector<unsigned char>& bytes);
-	virtual void serialize_data(std::vector<unsigned char>& bytes);
+	virtual void serialize_head(std::vector<uint8_t>& bytes);
+	virtual void serialize_body(std::vector<uint8_t>& bytes);
 	virtual IDataStorageObjectPtr clone() const;
 
 private:
@@ -120,7 +120,7 @@ unsigned ArrayData<T>::get_data_size() const
 }
 
 template <typename T>
-void ArrayData<T>::serialize_head(std::vector<unsigned char>& bytes)
+void ArrayData<T>::serialize_head(std::vector<uint8_t>& bytes)
 {
 	// type
 	unsigned int type_size = data_.empty() ? 0 : data_[0].get_data_size();
@@ -146,12 +146,12 @@ void ArrayData<T>::serialize_head(std::vector<unsigned char>& bytes)
 }
 
 template <typename T>
-void ArrayData<T>::serialize_data(std::vector<unsigned char>& bytes)
+void ArrayData<T>::serialize_body(std::vector<uint8_t>& bytes)
 {
 	// data
 	for (unsigned int i = 0; i < data_.size(); ++i)
 	{
-		data_[i].serialize_data(bytes);
+		data_[i].serialize_body(bytes);
 	}
 }
 

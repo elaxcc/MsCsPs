@@ -158,6 +158,8 @@
     <ClCompile Include="..\GDS\Utility\DataStorage\DataStorageCommon.cpp" />
     <ClCompile Include="..\GDS\Utility\DataStorage\IDataStorageObject.cpp" />
     <ClCompile Include="..\GDS\Utility\DataStorage\ObjectData.cpp" />
+    <ClCompile Include="..\GDS\Utility\DataStorage\Parser\Parser.cpp" />
+    <ClCompile Include="..\GDS\Utility\DataStorage\Parser\State.cpp" />
     <ClCompile Include="GDS\GDS_DataStorage_Test.cpp" />
     <ClCompile Include="GTest.cpp" />
     <ClCompile Include="stdafx.cpp">

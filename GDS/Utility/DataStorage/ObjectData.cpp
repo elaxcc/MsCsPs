@@ -70,7 +70,7 @@ IDataStorageObject::Type ObjectData::get_type()
 	return IDataStorageObject::TypeObject;
 }
 
-void ObjectData::serialize_head(std::vector<unsigned char>& bytes)
+void ObjectData::serialize_head(std::vector<uint8_t>& bytes)
 {
 	// object has type lenfth == 0
 	bytes.push_back(0x00);
@@ -83,7 +83,7 @@ void ObjectData::serialize_head(std::vector<unsigned char>& bytes)
 	}
 }
 
-void ObjectData::serialize_data(std::vector<unsigned char>& bytes)
+void ObjectData::serialize_body(std::vector<uint8_t>& bytes)
 {
 	// first bracket
 	bytes.push_back(cFirstObjBracketStr);

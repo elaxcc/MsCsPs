@@ -34,7 +34,7 @@ std::vector<unsigned char> IDataStorageObject::serialize()
 	std::vector<unsigned char> bytes;
 
 	serialize_head(bytes);
-	serialize_data(bytes);
+	serialize_body(bytes);
 
 	return bytes;
 }

@@ -6,5 +6,3 @@
 #include <string>
 #include <vector>
 
-#include <boost/regex.hpp>
-

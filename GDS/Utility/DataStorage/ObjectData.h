@@ -28,8 +28,8 @@ public:
 	// IDataObject
 	virtual unsigned get_data_size() const;
 	virtual IDataStorageObject::Type get_type();
-	virtual void serialize_head(std::vector<unsigned char>& bytes);
-	virtual void serialize_data(std::vector<unsigned char>& bytes);
+	virtual void serialize_head(std::vector<uint8_t>& bytes);
+	virtual void serialize_body(std::vector<uint8_t>& bytes);
 	virtual IDataStorageObjectPtr clone() const;
 
 	IDataStorageObjectPtr operator[] (std::string field_name);

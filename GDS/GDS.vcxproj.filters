@@ -76,6 +76,12 @@
     <Filter Include="Source Files\Utility\DataStorage">
       <UniqueIdentifier>{5ea85e8c-3d04-4634-a9ea-ae68bc691588}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\Utility\DataStorage\Parser">
+      <UniqueIdentifier>{a6378506-5dd9-4523-9bce-0901ade81ebf}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Utility\DataStorage\Parser">
+      <UniqueIdentifier>{3e413651-8894-480a-b931-166776cc494f}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -150,8 +156,11 @@
     <ClCompile Include="Utility\DataStorage\File.cpp">
       <Filter>Source Files\Utility\DataStorage</Filter>
     </ClCompile>
-    <ClCompile Include="Utility\DataStorage\Parser.cpp">
-      <Filter>Source Files\Utility\DataStorage</Filter>
+    <ClCompile Include="Utility\DataStorage\Parser\Parser.cpp">
+      <Filter>Source Files\Utility\DataStorage\Parser</Filter>
+    </ClCompile>
+    <ClCompile Include="Utility\DataStorage\Parser\State.cpp">
+      <Filter>Source Files\Utility\DataStorage\Parser</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -236,8 +245,11 @@
     <ClInclude Include="Utility\DataStorage\File.h">
       <Filter>Header Files\Utility\DataStorage</Filter>
     </ClInclude>
-    <ClInclude Include="Utility\DataStorage\Parser.h">
-      <Filter>Header Files\Utility\DataStorage</Filter>
+    <ClInclude Include="Utility\DataStorage\Parser\Parser.h">
+      <Filter>Header Files\Utility\DataStorage\Parser</Filter>
+    </ClInclude>
+    <ClInclude Include="Utility\DataStorage\Parser\State.h">
+      <Filter>Header Files\Utility\DataStorage\Parser</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

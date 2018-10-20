@@ -29,9 +29,9 @@ public:
 
 	virtual unsigned get_data_size() const = 0;
 	virtual Type get_type() = 0;
-	std::vector<unsigned char> serialize();
-	virtual void serialize_head(std::vector<unsigned char>& bytes) = 0;
-	virtual void serialize_data(std::vector<unsigned char>& bytes) = 0;
+	std::vector<uint8_t> serialize();
+	virtual void serialize_head(std::vector<uint8_t>& bytes) = 0;
+	virtual void serialize_body(std::vector<uint8_t>& bytes) = 0;
 	virtual IDataStorageObjectPtr clone() const = 0;
 
 private:

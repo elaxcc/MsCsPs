@@ -23,8 +23,8 @@ public:
 	// IDataStorageObject
 	virtual unsigned get_data_size() const;
 	virtual IDataStorageObject::Type get_type();
-	virtual void serialize_head(std::vector<unsigned char>& bytes);
-	virtual void serialize_data(std::vector<unsigned char>& bytes);
+	virtual void serialize_head(std::vector<uint8_t>& bytes);
+	virtual void serialize_body(std::vector<uint8_t>& bytes);
 	virtual IDataStorageObjectPtr clone() const;
 
 	SimpleData<T>& operator= (const T& l);
@@ -83,11 +83,11 @@ unsigned SimpleData<T>::get_data_size() const
 }
 
 template<typename T>
-void SimpleData<T>::serialize_head(std::vector<unsigned char>& bytes)
+void SimpleData<T>::serialize_head(std::vector<uint8_t>& bytes)
 {
 	// type
 	bytes.push_back(sizeof(T));
-	bytes.push_back(cDelimiterStr);
+	bytes.push_back(cDelimiterStr);  
 
 	// name
 	for (char c : get_name())
@@ -98,7 +98,7 @@ void SimpleData<T>::serialize_head(std::vector<unsigned char>& bytes)
 }
 
 template<typename T>
-void SimpleData<T>::serialize_data(std::vector<unsigned char>& bytes)
+void SimpleData<T>::serialize_body(std::vector<uint8_t>& bytes)
 {
 	// data
 	for (unsigned int i = 0; i < sizeof(T); ++i)

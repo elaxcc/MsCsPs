@@ -3,6 +3,7 @@
 #include "GDS/Utility/DataStorage/SimpleData.h"
 #include "GDS/Utility/DataStorage/ArrayData.h"
 #include "GDS/Utility/DataStorage/ObjectData.h"
+#include "GDS/Utility/DataStorage/Parser/Parser.h"
 
 TEST(GDS_DataStorage, SimpleData)
 {
@@ -282,6 +283,20 @@ TEST(GDS_DataStorage, ObjectData)
 	
 	IDataStorageObjectPtr simple_ptr = obj_2["arr"];
 	ASSERT_EQ(arr_char.get_name(), simple_ptr->get_name());
-	
 }
 
+TEST(GDS_DataStorage, Parser)
+{
+	using namespace GDS::DataStorage;
+
+	ObjectData obj("obj_2");
+	SimpleData<char> simp_char(std::string("smpl"), 'D');
+	obj.insert(simp_char);
+	SimpleData<char> arr_data[1];
+	arr_data[0] = 'a';
+	ArrayData<SimpleData<char>> arr_char("arr", arr_data, 1);
+	obj.insert(arr_char);
+	std::vector<uint8_t> serial_data = obj.serialize();
+
+	Parser parser(serial_data);
+}

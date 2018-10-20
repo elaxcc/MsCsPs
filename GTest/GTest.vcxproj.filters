@@ -19,6 +19,12 @@
     <ClCompile Include="GDS\GDS_DataStorage_Test.cpp">
       <Filter>Source Files\GDS</Filter>
     </ClCompile>
+    <ClCompile Include="..\GDS\Utility\DataStorage\Parser\Parser.cpp">
+      <Filter>Source Files\GDS\DataStorage\Parser</Filter>
+    </ClCompile>
+    <ClCompile Include="..\GDS\Utility\DataStorage\Parser\State.cpp">
+      <Filter>Source Files\GDS\DataStorage\Parser</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stdafx.h">
@@ -43,6 +49,9 @@
     </Filter>
     <Filter Include="Source Files\GDS\DataStorage">
       <UniqueIdentifier>{e7477b7f-be94-4fb7-af70-55524e5159e5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\GDS\DataStorage\Parser">
+      <UniqueIdentifier>{26c167e6-ac34-49ec-a954-20b129e8aff5}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>
