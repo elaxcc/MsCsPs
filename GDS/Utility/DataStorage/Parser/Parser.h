@@ -2,6 +2,7 @@
 
 #include "../DataStorageCommon.h"
 #include "../IDataStorageObject.h"
+#include "State.h"
 
 namespace GDS
 {
@@ -12,27 +13,51 @@ namespace DataStorage
 class Parser
 {
 public:
+	enum Error
+	{
+		ErrorOk,
+		ErrorNoEnoughData,
+		ErrorWronDelimeterAfterType,
+		ErrorArrayAbsentOpeningSquaredBracket,
+		ErrorArrayAbsentClosingSquaredBracket,
+		ErrorArrayBytesBetweenBracketsWrong,
+		ErrorNameWrongFirstSymbol
+	};
+
+
 	Parser();
 	Parser(const std::vector<uint8_t>& data);
 	~Parser();
 
-	int exec(const std::vector<uint8_t>& data);
+	int exec(const std::vector<uint8_t>& binary_data);
 	void clean();
 	const std::list<IDataStorageObjectPtr>& get_data() const;
 
-private:
-	enum State
-	{
-		State_Empty,
-		State_GotType,
-		State_GotName,
-		State_GotData
-	};
+	void set_state(const IStatePtr &state);
+	IStatePtr Parser::get_state();
 
+	void set_error(Error error);
+	Error get_error() const;
+
+	void set_data_type(uint8_t obj_type);
+	uint8_t get_data_type() const;
+
+	void obj_is_array(unsigned array_size);
+
+	void set_data_name(const std::string &data_name);
+	std::string get_data_name() const;
+
+private:
 	std::list<IDataStorageObjectPtr> data_;
 
-	State current_state_;
-	IDataStorageObject::Type current_obj_type_;
+	IStatePtr current_state_;
+
+	uint8_t current_data_type_;
+	std::string current_data_name_;
+	bool current_data_is_array_;
+	unsigned int current_data_array_size_;
+
+	Error error_;
 };
 
 } // namespace DataStorage

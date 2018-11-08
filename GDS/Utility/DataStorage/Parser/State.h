@@ -16,21 +16,14 @@ public:
 
 	Parser* get_parser();
 
-	virtual std::vector<uint8_t>::const_iterator process(const std::vector<uint8_t> &data) = 0;
+	virtual std::vector<uint8_t>::const_iterator process(
+		const std::vector<uint8_t> &binary_data,
+		std::vector<uint8_t>::const_iterator &pos) = 0;
 
-private:
+protected:
 	Parser *parser_;
 };
-
-class StateBegin : public IState
-{
-public:
-	StateBegin(Parser *parser);
-	virtual ~StateBegin();
-
-	// IState
-	std::vector<uint8_t>::const_iterator process(const std::vector<uint8_t> &data);
-};
+typedef std::shared_ptr<IState> IStatePtr;
 
 class StateGetType : public IState
 {
@@ -39,7 +32,9 @@ public:
 	virtual ~StateGetType();
 
 	// IState
-	std::vector<uint8_t>::const_iterator process(const std::vector<uint8_t> &data);
+	std::vector<uint8_t>::const_iterator process(
+		const std::vector<uint8_t> &binary_data,
+		std::vector<uint8_t>::const_iterator &pos);
 };
 
 class StateGetName : public IState
@@ -49,7 +44,17 @@ public:
 	virtual ~StateGetName();
 
 	// IState
-	std::vector<uint8_t>::const_iterator process(const std::vector<uint8_t> &data);
+	std::vector<uint8_t>::const_iterator process(
+		const std::vector<uint8_t> &binary_data,
+		std::vector<uint8_t>::const_iterator &pos);
+
+private:
+	bool check_name(const std::vector<uint8_t> &name);
+	bool check_name_for_array(const std::vector<uint8_t> &name);
+
+	std::vector<uint8_t> data_name_only_;
+	bool is_array_;
+	unsigned int array_size_;
 };
 
 class StateGetData : public IState
@@ -59,17 +64,21 @@ public:
 	virtual ~StateGetData();
 
 	// IState
-	std::vector<uint8_t>::const_iterator process(const std::vector<uint8_t> &data);
+	std::vector<uint8_t>::const_iterator process(
+		const std::vector<uint8_t> &binary_data,
+		std::vector<uint8_t>::const_iterator &pos);
 };
 
-class StateCompleted : public IState
+class StateComplete : public IState
 {
 public:
-	StateCompleted(Parser *parser);
-	virtual ~StateCompleted();
+	StateComplete(Parser *parser);
+	virtual ~StateComplete();
 
 	// IState
-	std::vector<uint8_t>::const_iterator process(const std::vector<uint8_t> &data);
+	std::vector<uint8_t>::const_iterator process(
+		const std::vector<uint8_t> &binary_data,
+		std::vector<uint8_t>::const_iterator &pos);
 };
 
 

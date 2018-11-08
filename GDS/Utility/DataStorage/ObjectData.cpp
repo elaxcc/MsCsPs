@@ -81,6 +81,7 @@ void ObjectData::serialize_head(std::vector<uint8_t>& bytes)
 	{
 		bytes.push_back(c);
 	}
+	bytes.push_back(cDelimiterStr);
 }
 
 void ObjectData::serialize_body(std::vector<uint8_t>& bytes)

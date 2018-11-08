@@ -262,7 +262,7 @@ TEST(GDS_DataStorage, ObjectData)
 	obj_2.insert(arr_char);
 
 	std::vector<unsigned char> expected_serialized_data = 
-		{ 0x00, ':', 'o', 'b', 'j', '_', '2', 
+		{ 0x00, ':', 'o', 'b', 'j', '_', '2', ':',
 		'{', 
 			0x01, ':', 'a', 'r', 'r', '[', 0x01, 0x00, 0x00, 0x00, ']', ':', 'a',
 			0x01, ':', 's', 'm', 'p', 'l', ':', 'D',
@@ -290,13 +290,16 @@ TEST(GDS_DataStorage, Parser)
 	using namespace GDS::DataStorage;
 
 	ObjectData obj("obj_2");
+
 	SimpleData<char> simp_char(std::string("smpl"), 'D');
 	obj.insert(simp_char);
+
 	SimpleData<char> arr_data[1];
-	arr_data[0] = 'a';
+	arr_data[0] = 'Q';
 	ArrayData<SimpleData<char>> arr_char("arr", arr_data, 1);
 	obj.insert(arr_char);
+
 	std::vector<uint8_t> serial_data = obj.serialize();
 
-	Parser parser(serial_data);
+	Parser parser(arr_char.serialize());
 }
