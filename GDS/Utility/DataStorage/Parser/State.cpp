@@ -172,7 +172,7 @@ bool StateGetName::check_name_for_array(const std::vector<uint8_t> &name)
 	std::vector<uint8_t>::const_iterator open_bracket_pos = name.begin();
 	while (open_bracket_pos != name.end())
 	{
-		if (*open_bracket_pos == DataStorage::cFirstBracketStr)
+		if (*open_bracket_pos == DataStorage::cOpenSquareBracketStr)
 		{
 			find_open_bracket = true;
 			break;
@@ -182,7 +182,7 @@ bool StateGetName::check_name_for_array(const std::vector<uint8_t> &name)
 
 	// check last byte in name for the matching closing squared bracket
 	bool find_closing_bracket = false;
-	if (*(name.end() - 1) == DataStorage::cLastBracketStr)
+	if (*(name.end() - 1) == DataStorage::cCloseSquareBracketStr)
 	{
 		find_closing_bracket = true;
 	}

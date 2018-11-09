@@ -25,6 +25,7 @@ public:
 	T& operator[] (int index);
 
 	// IDataStorageObject
+	virtual std::string get_data_type() const;
 	virtual unsigned get_data_size() const;
 	virtual IDataStorageObject::Type get_type();
 	virtual void serialize_head(std::vector<uint8_t>& bytes);
@@ -110,6 +111,12 @@ T& ArrayData<T>::operator[] (int index)
 }
 
 template <typename T>
+std::string ArrayData<T>::get_data_type() const
+{
+	return T().get_data_type();
+}
+
+template <typename T>
 unsigned ArrayData<T>::get_data_size() const
 {
 	if (data_.empty())
@@ -123,8 +130,9 @@ template <typename T>
 void ArrayData<T>::serialize_head(std::vector<uint8_t>& bytes)
 {
 	// type
-	unsigned int type_size = data_.empty() ? 0 : data_[0].get_data_size();
-	bytes.push_back(type_size);
+	std::string type_name = get_data_type();
+	bytes.insert(bytes.end(), type_name.begin(), type_name.end());
+
 	bytes.push_back(cDelimiterStr);
 
 	// name
@@ -134,14 +142,14 @@ void ArrayData<T>::serialize_head(std::vector<uint8_t>& bytes)
 	}
 
 	// array size
-	bytes.push_back(cFirstBracketStr);
+	bytes.push_back(cOpenSquareBracketStr);
 	unsigned int data_cnt = data_.size();
 	for (unsigned int i = 0; i < sizeof(unsigned int); ++i)
 	{
 		unsigned char tmp = *((unsigned char*)(&data_cnt) + i);
 		bytes.push_back(tmp);
 	}
-	bytes.push_back(cLastBracketStr);
+	bytes.push_back(cCloseSquareBracketStr);
 	bytes.push_back(cDelimiterStr);
 }
 

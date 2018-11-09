@@ -60,6 +60,11 @@ void ObjectData::erase()
 	fields_.clear();
 }
 
+std::string ObjectData::get_data_type() const
+{
+	return std::string(DataStorage::cObjectTypeStr);
+}
+
 unsigned ObjectData::get_data_size() const
 {
 	return 0;
@@ -73,7 +78,8 @@ IDataStorageObject::Type ObjectData::get_type()
 void ObjectData::serialize_head(std::vector<uint8_t>& bytes)
 {
 	// object has type lenfth == 0
-	bytes.push_back(0x00);
+	std::string type_name = get_data_type();
+	bytes.insert(bytes.end(), type_name.begin(), type_name.end());
 	bytes.push_back(cDelimiterStr);
 
 	// name
@@ -87,7 +93,7 @@ void ObjectData::serialize_head(std::vector<uint8_t>& bytes)
 void ObjectData::serialize_body(std::vector<uint8_t>& bytes)
 {
 	// first bracket
-	bytes.push_back(cFirstObjBracketStr);
+	bytes.push_back(cOpenFigureBracketStr);
 
 	for (auto field : fields_)
 	{
@@ -96,7 +102,7 @@ void ObjectData::serialize_body(std::vector<uint8_t>& bytes)
 	}
 
 	// last bracket
-	bytes.push_back(cLastObjBracketStr);
+	bytes.push_back(cCloseFigureBracketStr);
 }
 
 IDataStorageObjectPtr ObjectData::clone() const

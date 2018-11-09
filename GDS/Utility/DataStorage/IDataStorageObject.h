@@ -27,6 +27,7 @@ public:
 	void set_name(const std::string& name);
 	const std::string& get_name() const;
 
+	virtual std::string get_data_type() const = 0;
 	virtual unsigned get_data_size() const = 0;
 	virtual Type get_type() = 0;
 	std::vector<uint8_t> serialize();

@@ -21,6 +21,7 @@ public:
 	T& get_data();
 	
 	// IDataStorageObject
+	virtual std::string get_data_type() const;
 	virtual unsigned get_data_size() const;
 	virtual IDataStorageObject::Type get_type();
 	virtual void serialize_head(std::vector<uint8_t>& bytes);
@@ -77,6 +78,12 @@ T& SimpleData<T>::get_data()
 }
 
 template<typename T>
+std::string SimpleData<T>::get_data_type() const
+{
+	return std::string(typeid(T).name());
+}
+
+template<typename T>
 unsigned SimpleData<T>::get_data_size() const
 {
 	return sizeof(T);
@@ -86,7 +93,8 @@ template<typename T>
 void SimpleData<T>::serialize_head(std::vector<uint8_t>& bytes)
 {
 	// type
-	bytes.push_back(sizeof(T));
+	std::string type_name = get_data_type();
+	bytes.insert(bytes.end(), type_name.begin(), type_name.end());
 	bytes.push_back(cDelimiterStr);  
 
 	// name

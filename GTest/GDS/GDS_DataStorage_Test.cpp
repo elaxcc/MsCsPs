@@ -39,7 +39,14 @@ TEST(GDS_DataStorage, SimpleData)
 	ASSERT_NE(sizeof(NotTestedType), simple_data_2.get_data_size());
 	ASSERT_EQ(not_data, simple_data_2.get_data());
 
-	std::vector<unsigned char> expected_serialized_data = {0x04, ':', 'd', ':', 0x01, 0x02, 0x03, 0x04};
+	std::vector<unsigned char> expected_serialized_data =
+		{
+			'u', 'n', 's', 'i', 'g', 'n', 'e', 'd', ' ', 'i', 'n', 't',
+			':',
+			'd',
+			':',
+			0x01, 0x02, 0x03, 0x04
+		};
 	std::vector<unsigned char> serialized_data = simple_data_1.serialize();
 	bool comparison_result = std::equal(expected_serialized_data.begin(),
 		expected_serialized_data.end(), serialized_data.begin());
@@ -154,7 +161,14 @@ TEST(GDS_DataStorage, ArrayData)
 	data_2[1].set_data(0xA2);
 	data_2[2].set_data(0xA3);
 	ArrayData<SimpleData<char>> array_5("a",data_2, 3);
-	std::vector<unsigned char> expected_serialized_data = { 0x01, ':', 'a', '[', 0x03, 0x00, 0x00, 0x00, ']', ':', 0xA1, 0xA2, 0xA3 };
+	std::vector<unsigned char> expected_serialized_data =
+		{
+			'c', 'h', 'a', 'r',
+			':',
+			'a', '[', 0x03, 0x00, 0x00, 0x00, ']',
+			':',
+			0xA1, 0xA2, 0xA3
+		};
 	std::vector<unsigned char> serialized_data = array_5.serialize();
 	bool comparison_result = std::equal(expected_serialized_data.begin(), expected_serialized_data.end(), serialized_data.begin());
 	ASSERT_EQ(true, comparison_result);
@@ -163,7 +177,14 @@ TEST(GDS_DataStorage, ArrayData)
 	data_3[0] = 0xA1A1A1A1;
 	data_3[1] = 0xA2A2A2A2;
 	ArrayData<SimpleData<int>> array_6("a", data_3, 2);
-	expected_serialized_data = { 0x04, ':', 'a', '[', 0x02, 0x00, 0x00, 0x00, ']', ':', 0xA1, 0xA1, 0xA1, 0xA1, 0xA2, 0xA2, 0xA2, 0xA2, };
+	expected_serialized_data =
+		{
+			'i', 'n', 't',
+			':',
+			'a', '[', 0x02, 0x00, 0x00, 0x00, ']',
+			':',
+			0xA1, 0xA1, 0xA1, 0xA1, 0xA2, 0xA2, 0xA2, 0xA2,
+		};
 	serialized_data = array_6.serialize();
 	comparison_result = std::equal(expected_serialized_data.begin(), expected_serialized_data.end(), serialized_data.begin());
 	ASSERT_EQ(true, comparison_result);
@@ -177,16 +198,21 @@ TEST(GDS_DataStorage, ArrayData)
 	serialized_data = obj_arr.serialize();
 
 	std::vector<unsigned char> expected_arr_str =
-		{ 0x00, ':', 'o', 'b', 'j', '_', 'a', 'r', 'r', '[', 0x03, 0x00, 0x00, 0x00, ']', ':'
-		, '{'
-		, 0x01, ':', 's', '1', ':', 'a'
-		, '}'
-		, '{'
-		, 0x01, ':', 's', '2', ':', 'b'
-		, '}'
-		, '{'
-		, 0x01, ':', 's', '3', ':', 'c'
-		, '}' };
+		{
+			'o', 'b', 'j',
+			':',
+			'o', 'b', 'j', '_', 'a', 'r', 'r', '[', 0x03, 0x00, 0x00, 0x00, ']',
+			':',
+			'{',
+				'c', 'h', 'a', 'r', ':', 's', '1', ':', 'a',
+			'}',
+			'{',
+				'c', 'h', 'a', 'r', ':', 's', '2', ':', 'b',
+			'}',
+			'{',
+				'c', 'h', 'a', 'r', ':', 's', '3', ':', 'c',
+			'}'
+		};
 	comparison_result = std::equal(expected_arr_str.begin(), expected_arr_str.end(), serialized_data.begin());
 	ASSERT_EQ(true, comparison_result);
 }
@@ -262,11 +288,24 @@ TEST(GDS_DataStorage, ObjectData)
 	obj_2.insert(arr_char);
 
 	std::vector<unsigned char> expected_serialized_data = 
-		{ 0x00, ':', 'o', 'b', 'j', '_', '2', ':',
-		'{', 
-			0x01, ':', 'a', 'r', 'r', '[', 0x01, 0x00, 0x00, 0x00, ']', ':', 'a',
-			0x01, ':', 's', 'm', 'p', 'l', ':', 'D',
-		'}' };
+		{
+			'o', 'b', 'j',
+			':',
+			'o', 'b', 'j', '_', '2',
+			':',
+			'{',
+				'c', 'h', 'a', 'r',
+				':',
+				'a', 'r', 'r', '[', 0x01, 0x00, 0x00, 0x00, ']',
+				':',
+				'a',
+				'c', 'h', 'a', 'r',
+				':',
+				's', 'm', 'p', 'l',
+				':',
+				'D',
+			'}'
+		};
 	std::vector<unsigned char> serialized_data = obj_2.serialize();
 	bool comparison_result = std::equal(expected_serialized_data.begin(),
 		expected_serialized_data.end(), serialized_data.begin());
@@ -301,5 +340,5 @@ TEST(GDS_DataStorage, Parser)
 
 	std::vector<uint8_t> serial_data = obj.serialize();
 
-	Parser parser(arr_char.serialize());
+	//Parser parser(arr_char.serialize());
 }
