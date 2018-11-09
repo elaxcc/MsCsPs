@@ -57,6 +57,18 @@ private:
 	unsigned int array_size_;
 };
 
+class StateBegining : public IState
+{
+public:
+	StateBegining(Parser *parser);
+	virtual ~StateBegining();
+
+	// IState
+	std::vector<uint8_t>::const_iterator process(
+		const std::vector<uint8_t> &binary_data,
+		std::vector<uint8_t>::const_iterator &pos);
+};
+
 class StateGetData : public IState
 {
 public:

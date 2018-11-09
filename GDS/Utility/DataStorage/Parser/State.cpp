@@ -26,6 +26,28 @@ Parser* IState::get_parser()
 	return parser_;
 }
 
+StateBegining::StateBegining(Parser *parser)
+	: IState(parser)
+{
+
+}
+
+StateBegining::~StateBegining()
+{
+
+}
+
+std::vector<uint8_t>::const_iterator StateBegining::process(
+	const std::vector<uint8_t> &binary_data,
+	std::vector<uint8_t>::const_iterator &pos)
+{
+	// reset parser and go to StateGetType
+	parser_->reset();
+	parser_->set_state(IStatePtr(new StateGetType(parser_)));
+
+	return pos;
+}
+
 StateGetType::StateGetType(Parser *parser)
 	: IState(parser)
 {
@@ -103,7 +125,7 @@ std::vector<uint8_t>::const_iterator StateGetName::process(
 	{
 		if (parser_->get_error() == Parser::ErrorOk)
 		{
-			parser_->obj_is_array(array_size_);
+			parser_->set_obj_array_type(array_size_);
 		}
 	}
 
@@ -213,16 +235,21 @@ std::vector<uint8_t>::const_iterator StateGetData::process(
 	const std::vector<uint8_t> &binary_data,
 	std::vector<uint8_t>::const_iterator &pos)
 {
-	// check data type, depending of data type (simple, array or object)
-	// different methods is used
+	unsigned cnt = parser_->obj_is_array() ? parser_->get_array_size() : 1;
+	for (unsigned int i = 0; i < cnt; ++i)
+	{
+		if (parser_->get_data_type() != 0x00) // simple data
+		{
+			for (unsigned int cur_byte = 0; cur_byte < parser_->get_data_type(); ++cur_byte)
+			{
+				
+			}
+		}
+		else // object data
+		{
 
-	// simple data
-
-	// simple array data
-
-	// object data
-
-	// object array data
+		}
+	}
 
 	return pos;
 }
