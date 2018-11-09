@@ -63,28 +63,28 @@ std::vector<uint8_t>::const_iterator StateGetType::process(
 	const std::vector<uint8_t> &binary_data,
 	std::vector<uint8_t>::const_iterator &pos)
 {
-	// check binary_data length from current pos to end
-	// if it less than 2 return and wait data from parser
-	if (binary_data.end() - pos < 2)
+	// try to find open square bracket
+	std::vector<uint8_t>::const_iterator iter = pos;
+	for (; iter != binary_data.end(); ++iter)
+	{
+		if (*iter == DataStorage::cDelimiterStr)
+		{
+			break;
+		}
+	}
+
+	if (iter == binary_data.end()) // can't find open square bracket
 	{
 		parser_->set_error(Parser::ErrorNoEnoughData);
-		return pos;
+		return iter;
 	}
 
-	// get data type
-	parser_->set_data_type(*pos++);
-
-	// next byte must be delimiter == ':', check it
-	if (*pos != DataStorage::cDelimiterStr)
-	{
-		parser_->set_error(Parser::ErrorWronDelimeterAfterType);
-		return pos;
-	}
+	parser_->set_data_type(std::string(pos, iter));
 
 	// go to GetName state
 	parser_->set_state(IStatePtr(new StateGetName(parser_)));
 
-	return ++pos;
+	return ++iter;
 }
 
 StateGetName::StateGetName(Parser *parser)
@@ -238,7 +238,7 @@ std::vector<uint8_t>::const_iterator StateGetData::process(
 	unsigned cnt = parser_->obj_is_array() ? parser_->get_array_size() : 1;
 	for (unsigned int i = 0; i < cnt; ++i)
 	{
-		if (parser_->get_data_type() != 0x00) // simple data
+		if (parser_->get_data_type() != DataStorage::cObjectTypeStr) // simple data
 		{
 			for (unsigned int cur_byte = 0; cur_byte < parser_->get_data_type(); ++cur_byte)
 			{

@@ -14,7 +14,6 @@ namespace DataStorage
 
 Parser::Parser()
 	: current_state_(new StateGetType(this))
-	, current_data_type_(0)
 	, current_data_is_array_(false)
 	, current_data_array_size_(0)
 {
@@ -23,7 +22,6 @@ Parser::Parser()
 
 Parser::Parser(const std::vector<uint8_t>& data)
 	: current_state_(new StateGetType(this))
-	, current_data_type_(0)
 	, current_data_is_array_(false)
 	, current_data_array_size_(0)
 {
@@ -41,7 +39,7 @@ int Parser::exec(const std::vector<uint8_t>& binary_data)
 
 	while (iter != binary_data.end())
 	{
-		current_state_->process(binary_data, iter);
+		iter = current_state_->process(binary_data, iter);
 	}
 
 	return 0;
@@ -50,7 +48,7 @@ int Parser::exec(const std::vector<uint8_t>& binary_data)
 void Parser::reset()
 {
 	current_state_.reset(new StateGetType(this));
-	current_data_type_ = 0;
+	current_data_type_.clear();
 	current_data_name_.clear();
 	current_data_is_array_ = false;
 	current_data_array_size_ = 0;
@@ -88,9 +86,14 @@ Parser::Error Parser::get_error() const
 	return error_;
 }
 
-void Parser::set_data_type(uint8_t obj_type)
+void Parser::set_data_type(const std::string &obj_type)
 {
 	current_data_type_ = obj_type;
+}
+
+const std::string& Parser::get_data_type() const
+{
+	return current_data_type_;
 }
 
 void Parser::set_data_name(const std::string &data_name)
@@ -101,11 +104,6 @@ void Parser::set_data_name(const std::string &data_name)
 std::string Parser::get_data_name() const
 {
 	return current_data_name_;
-}
-
-uint8_t Parser::get_data_type() const
-{
-	return current_data_type_;
 }
 
 void Parser::set_obj_array_type(unsigned int array_size)

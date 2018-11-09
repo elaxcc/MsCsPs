@@ -40,8 +40,8 @@ public:
 	void set_error(Error error);
 	Error get_error() const;
 
-	void set_data_type(uint8_t obj_type);
-	uint8_t get_data_type() const;
+	void set_data_type(const std::string &obj_type);
+	const std::string& get_data_type() const;
 
 	void set_data_name(const std::string &data_name);
 	std::string get_data_name() const;
@@ -54,7 +54,7 @@ private:
 	std::list<IDataStorageObjectPtr> data_;
 
 	IStatePtr current_state_;
-	uint8_t current_data_type_;
+	std::string current_data_type_;
 	std::string current_data_name_;
 	bool current_data_is_array_;
 	unsigned int current_data_array_size_;

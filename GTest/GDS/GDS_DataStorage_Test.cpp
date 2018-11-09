@@ -340,5 +340,5 @@ TEST(GDS_DataStorage, Parser)
 
 	std::vector<uint8_t> serial_data = obj.serialize();
 
-	//Parser parser(arr_char.serialize());
+	Parser parser(arr_char.serialize());
 }
