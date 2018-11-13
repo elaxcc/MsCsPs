@@ -241,7 +241,7 @@ std::vector<uint8_t>::const_iterator StateGetData::process(
 		// set parser error, break and wait other raw bytes
 
 		const DataStorageFactory &factory = parser_->get_factory();
-		if (pos + factory.needs_bytes(parser_->get_data_type()) < binary_data.end())
+		if (pos + factory.bytes_needs_for_simple(parser_->get_data_type()) < binary_data.end())
 		{
 			// no enough data in name part of binary data
 			parser_->set_error(Parser::ErrorNoEnoughData);
@@ -252,7 +252,7 @@ std::vector<uint8_t>::const_iterator StateGetData::process(
 		IDataStorageObjectPtr obj_ptr = factory.create_simple(
 			parser_->get_data_type(),
 			parser_->get_data_name(),
-			std::vector<uint8_t>(pos, pos + factory.needs_bytes(parser_->get_data_type())));
+			std::vector<uint8_t>(pos, pos + factory.bytes_needs_for_simple(parser_->get_data_type())));
 	}
 	else if (parser_->obj_is_array()) // array data
 	{
