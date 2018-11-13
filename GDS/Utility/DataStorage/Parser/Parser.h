@@ -2,6 +2,7 @@
 
 #include "../DataStorageCommon.h"
 #include "../IDataStorageObject.h"
+#include "../DataStorageFactory.h"
 #include "State.h"
 
 namespace GDS
@@ -32,6 +33,7 @@ public:
 	int exec(const std::vector<uint8_t>& binary_data);
 	void reset();
 	void clean();
+	void insert(IDataStorageObjectPtr data);
 	const std::list<IDataStorageObjectPtr>& get_data() const;
 
 	void set_state(const IStatePtr &state);
@@ -50,6 +52,8 @@ public:
 	bool obj_is_array();
 	unsigned int  get_array_size();
 
+	const DataStorageFactory& get_factory();
+
 private:
 	std::list<IDataStorageObjectPtr> data_;
 
@@ -58,8 +62,9 @@ private:
 	std::string current_data_name_;
 	bool current_data_is_array_;
 	unsigned int current_data_array_size_;
-
 	Error error_;
+	
+	DataStorageFactory factory_;
 };
 
 } // namespace DataStorage

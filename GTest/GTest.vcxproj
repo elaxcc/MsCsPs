@@ -156,6 +156,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\GDS\Utility\DataStorage\DataStorageCommon.cpp" />
+    <ClCompile Include="..\GDS\Utility\DataStorage\DataStorageFactory.cpp" />
     <ClCompile Include="..\GDS\Utility\DataStorage\IDataStorageObject.cpp" />
     <ClCompile Include="..\GDS\Utility\DataStorage\ObjectData.cpp" />
     <ClCompile Include="..\GDS\Utility\DataStorage\Parser\Parser.cpp" />

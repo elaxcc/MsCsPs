@@ -62,7 +62,7 @@ void ObjectData::erase()
 
 std::string ObjectData::get_data_type() const
 {
-	return std::string(DataStorage::cObjectTypeStr);
+	return std::string(DataStorage::cTypeStr_Object);
 }
 
 unsigned ObjectData::get_data_size() const

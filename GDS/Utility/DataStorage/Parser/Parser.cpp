@@ -40,6 +40,9 @@ int Parser::exec(const std::vector<uint8_t>& binary_data)
 	while (iter != binary_data.end())
 	{
 		iter = current_state_->process(binary_data, iter);
+
+		//!fixme если получили ошибку о том, что не хватает данных, то
+		// нужно подождить остальные данные и продолжать парсить
 	}
 
 	return 0;
@@ -59,6 +62,11 @@ void Parser::clean()
 {
 	reset();
 	data_.clear();
+}
+
+void Parser::insert(IDataStorageObjectPtr data)
+{
+	data_.push_back(data);
 }
 
 const std::list<IDataStorageObjectPtr>& Parser::get_data() const
@@ -122,6 +130,10 @@ unsigned int Parser::get_array_size()
 	return current_data_array_size_;
 }
 
+const DataStorageFactory& Parser::get_factory()
+{
+	return factory_;
+}
 
 } // namespace DataStorage
 

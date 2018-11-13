@@ -7,3 +7,5 @@
 #include <vector>
 
 #include <typeinfo>
+
+#include <cassert>

@@ -87,7 +87,7 @@ void ArrayData<T>::set_data(const std::vector<T>& data)
 {
 	for (unsigned i = 0; i < data_.size(); ++i)
 	{
-		T tmp = data[i];
+		T tmp = data[i]; // if not create tmp then get error when execute
 		data_[i] = tmp;
 	}
 }

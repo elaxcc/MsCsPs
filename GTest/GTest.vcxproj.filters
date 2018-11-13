@@ -25,6 +25,9 @@
     <ClCompile Include="..\GDS\Utility\DataStorage\Parser\State.cpp">
       <Filter>Source Files\GDS\DataStorage\Parser</Filter>
     </ClCompile>
+    <ClCompile Include="..\GDS\Utility\DataStorage\DataStorageFactory.cpp">
+      <Filter>Source Files\GDS\DataStorage</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stdafx.h">

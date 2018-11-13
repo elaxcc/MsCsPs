@@ -235,21 +235,63 @@ std::vector<uint8_t>::const_iterator StateGetData::process(
 	const std::vector<uint8_t> &binary_data,
 	std::vector<uint8_t>::const_iterator &pos)
 {
-	unsigned cnt = parser_->obj_is_array() ? parser_->get_array_size() : 1;
+	if (parser_->get_data_type() != DataStorage::cTypeStr_Object && !parser_->obj_is_array()) // simple data
+	{
+		// check raw bytes amount, if it to less then need
+		// set parser error, break and wait other raw bytes
+
+		const DataStorageFactory &factory = parser_->get_factory();
+		if (pos + factory.needs_bytes(parser_->get_data_type()) < binary_data.end())
+		{
+			// no enough data in name part of binary data
+			parser_->set_error(Parser::ErrorNoEnoughData);
+			return binary_data.end();
+		}
+
+		// amount of bytes is enough
+		IDataStorageObjectPtr obj_ptr = factory.create_simple(
+			parser_->get_data_type(),
+			parser_->get_data_name(),
+			std::vector<uint8_t>(pos, pos + factory.needs_bytes(parser_->get_data_type())));
+	}
+	else if (parser_->obj_is_array()) // array data
+	{
+
+	}
+	else if (parser_->get_data_type() == DataStorage::cTypeStr_Object)
+	{
+
+	}
+
+	// object data
+
+	/*unsigned cnt = parser_->obj_is_array() ? parser_->get_array_size() : 1;
 	for (unsigned int i = 0; i < cnt; ++i)
 	{
 		if (parser_->get_data_type() != DataStorage::cObjectTypeStr) // simple data
 		{
-			for (unsigned int cur_byte = 0; cur_byte < parser_->get_data_type(); ++cur_byte)
+			// check raw bytes amount, if it to less then need
+			// set parser error, break and wait other raw bytes
+
+			const DataStorageBuilderSimpleData &factory = parser_->get_factory();
+			if (pos + factory.needs_bytes(parser_->get_data_type()) < binary_data.end())
 			{
-				
+				// no enough data in name part of binary data
+				parser_->set_error(Parser::ErrorNoEnoughData);
+				return binary_data.end();
 			}
+
+			// amount of bytes is enough
+			IDataStorageObjectPtr obj_ptr = factory.createSimple(
+				parser_->get_data_type(),
+				parser_->get_data_name(),
+				std::vector<uint8_t>(pos, pos + factory.needs_bytes(parser_->get_data_type())));
 		}
 		else // object data
 		{
 
 		}
-	}
+	}*/
 
 	return pos;
 }
