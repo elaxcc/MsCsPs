@@ -28,6 +28,12 @@
     <ClCompile Include="..\GDS\Utility\DataStorage\DataStorageFactory.cpp">
       <Filter>Source Files\GDS\DataStorage</Filter>
     </ClCompile>
+    <ClCompile Include="..\GDS\Utility\DataStorage\ArrayData.cpp">
+      <Filter>Source Files\GDS\DataStorage</Filter>
+    </ClCompile>
+    <ClCompile Include="..\GDS\Utility\DataStorage\SimpleData.cpp">
+      <Filter>Source Files\GDS\DataStorage</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stdafx.h">

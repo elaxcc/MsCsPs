@@ -27,8 +27,10 @@ public:
 	void set_name(const std::string& name);
 	const std::string& get_name() const;
 
-	virtual std::string get_data_type() const = 0;
-	virtual unsigned get_data_size() const = 0;
+	template<typename T>
+	T* to();
+
+	virtual uint8_t get_data_size() const = 0;
 	virtual Type get_type() = 0;
 	std::vector<uint8_t> serialize();
 	virtual void serialize_head(std::vector<uint8_t>& bytes) = 0;
@@ -38,6 +40,12 @@ public:
 private:
 	std::string name_;
 };
+
+template<typename T>
+T* IDataStorageObject::to()
+{
+	return static_cast<T*>(this);
+}
 
 } // namespace DataStorage
 

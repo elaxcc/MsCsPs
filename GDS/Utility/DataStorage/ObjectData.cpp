@@ -60,12 +60,7 @@ void ObjectData::erase()
 	fields_.clear();
 }
 
-std::string ObjectData::get_data_type() const
-{
-	return std::string(DataStorage::cTypeStr_Object);
-}
-
-unsigned ObjectData::get_data_size() const
+uint8_t ObjectData::get_data_size() const
 {
 	return 0;
 }
@@ -77,9 +72,8 @@ IDataStorageObject::Type ObjectData::get_type()
 
 void ObjectData::serialize_head(std::vector<uint8_t>& bytes)
 {
-	// object has type lenfth == 0
-	std::string type_name = get_data_type();
-	bytes.insert(bytes.end(), type_name.begin(), type_name.end());
+	// object has type == 0
+	bytes.push_back(0x00);
 	bytes.push_back(cDelimiterStr);
 
 	// name

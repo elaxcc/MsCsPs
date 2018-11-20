@@ -147,6 +147,7 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
     </ClCompile>
+    <ClCompile Include="Utility\DataStorage\ArrayData.cpp" />
     <ClCompile Include="Utility\DataStorage\DataStorageCommon.cpp" />
     <ClCompile Include="Utility\DataStorage\DataStorageFactory.cpp" />
     <ClCompile Include="Utility\DataStorage\File.cpp" />
@@ -154,6 +155,7 @@
     <ClCompile Include="Utility\DataStorage\ObjectData.cpp" />
     <ClCompile Include="Utility\DataStorage\Parser\Parser.cpp" />
     <ClCompile Include="Utility\DataStorage\Parser\State.cpp" />
+    <ClCompile Include="Utility\DataStorage\SimpleData.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Editor\Commands\CommandHistory.h" />

@@ -165,6 +165,12 @@
     <ClCompile Include="Utility\DataStorage\DataStorageFactory.cpp">
       <Filter>Source Files\Utility\DataStorage</Filter>
     </ClCompile>
+    <ClCompile Include="Utility\DataStorage\ArrayData.cpp">
+      <Filter>Source Files\Utility\DataStorage</Filter>
+    </ClCompile>
+    <ClCompile Include="Utility\DataStorage\SimpleData.cpp">
+      <Filter>Source Files\Utility\DataStorage</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stdafx.h">

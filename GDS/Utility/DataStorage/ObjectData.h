@@ -26,8 +26,7 @@ public:
 	T* get(const std::string& name);
 
 	// IDataObject
-	virtual std::string get_data_type() const;
-	virtual unsigned get_data_size() const;
+	virtual uint8_t get_data_size() const;
 	virtual IDataStorageObject::Type get_type();
 	virtual void serialize_head(std::vector<uint8_t>& bytes);
 	virtual void serialize_body(std::vector<uint8_t>& bytes);

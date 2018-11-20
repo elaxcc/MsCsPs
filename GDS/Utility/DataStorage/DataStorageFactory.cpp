@@ -32,7 +32,7 @@ unsigned int DataStorageSimpleFactory<T>::needs_bytes() const
 template<typename T>
 IDataStorageObjectPtr DataStorageSimpleFactory<T>::create(const std::string &name,
 	std::vector<uint8_t> raw_bytes) const
-{
+{/*
 	unsigned int data_size = sizeof(T);
 
 	assert(data_size == raw_bytes.size());
@@ -48,7 +48,7 @@ IDataStorageObjectPtr DataStorageSimpleFactory<T>::create(const std::string &nam
 		}
 		return IDataStorageObjectPtr(new SimpleData<T>(name, static_cast<T>(data)));
 	}
-	return IDataStorageObjectPtr(new SimpleData<T>());
+	return IDataStorageObjectPtr(new SimpleData<T>());*/
 }
 
 DataStorageArrayFactory::DataStorageArrayFactory(const std::map<std::string,
@@ -65,32 +65,32 @@ DataStorageArrayFactory::~DataStorageArrayFactory()
 
 unsigned int DataStorageArrayFactory::needs_bytes(const std::string &type, unsigned int size) const
 {
-	std::map<std::string, IDataStorageSimpleFactoryPtr>::const_iterator iter = simple_factories_.find(type);
-	if (iter != simple_factories_.end())
-	{
-		return iter->second->needs_bytes() * size;
-	}
+// 	std::map<std::string, IDataStorageSimpleFactoryPtr>::const_iterator iter = simple_factories_.find(type);
+// 	if (iter != simple_factories_.end())
+// 	{
+// 		return iter->second->needs_bytes() * size;
+// 	}
 	return 0;
 }
 
 IDataStorageObjectPtr DataStorageArrayFactory::create(const std::string &type, const std::string &name,
 	unsigned int size, std::vector<uint8_t> raw_bytes) const
 {
-	std::map<std::string, IDataStorageSimpleFactoryPtr>::const_iterator iter = simple_factories_.find(type);
-	if (iter != simple_factories_.end())
-	{
-		for (unsigned i = 0; i < size; i++)
-		{
-
-		}
-		
-	}
+// 	std::map<std::string, IDataStorageSimpleFactoryPtr>::const_iterator iter = simple_factories_.find(type);
+// 	if (iter != simple_factories_.end())
+// 	{
+// 		for (unsigned i = 0; i < size; i++)
+// 		{
+// 			
+// 		}
+// 		
+// 	}
 	return IDataStorageObjectPtr();
 }
 
 DataStorageFactory::DataStorageFactory()
 	: array_factory_(simple_factories_)
-{
+{/*
 	// char
 	simple_factories_.insert(
 		std::pair<std::string, IDataStorageSimpleFactoryPtr>(
@@ -197,7 +197,7 @@ DataStorageFactory::DataStorageFactory()
 	simple_factories_.insert(
 		std::pair<std::string, IDataStorageSimpleFactoryPtr>(
 			DataStorage::cTypeStr_uint64_t, IDataStorageSimpleFactoryPtr(
-				new DataStorageSimpleFactory<uint64_t>)));
+				new DataStorageSimpleFactory<uint64_t>)));*/
 }
 
 DataStorageFactory::~DataStorageFactory()
@@ -207,22 +207,22 @@ DataStorageFactory::~DataStorageFactory()
 
 unsigned int DataStorageFactory::bytes_needs_for_simple(const std::string &type) const
 {
-	std::map<std::string, IDataStorageSimpleFactoryPtr>::const_iterator iter = simple_factories_.find(type);
-	if (iter != simple_factories_.end())
-	{
-		return iter->second->needs_bytes();
-	}
+// 	std::map<std::string, IDataStorageSimpleFactoryPtr>::const_iterator iter = simple_factories_.find(type);
+// 	if (iter != simple_factories_.end())
+// 	{
+// 		return iter->second->needs_bytes();
+// 	}
 	return 0;
 }
 
 IDataStorageObjectPtr DataStorageFactory::create_simple(const std::string &type,
 	const std::string &name, std::vector<uint8_t> raw_bytes) const
 {
-	std::map<std::string, IDataStorageSimpleFactoryPtr>::const_iterator iter = simple_factories_.find(type);
-	if (iter != simple_factories_.end())
-	{
-		return iter->second->create(name, raw_bytes);
-	}
+// 	std::map<std::string, IDataStorageSimpleFactoryPtr>::const_iterator iter = simple_factories_.find(type);
+// 	if (iter != simple_factories_.end())
+// 	{
+// 		return iter->second->create(name, raw_bytes);
+// 	}
 	return IDataStorageObjectPtr();
 }
 
