@@ -25,11 +25,11 @@ protected:
 };
 typedef std::shared_ptr<IState> IStatePtr;
 
-class StateGetType : public IState
+class StateGetDataLength : public IState
 {
 public:
-	StateGetType(Parser *parser);
-	virtual ~StateGetType();
+	StateGetDataLength(Parser *parser);
+	virtual ~StateGetDataLength();
 
 	// IState
 	std::vector<uint8_t>::const_iterator process(
@@ -57,18 +57,6 @@ private:
 	unsigned int array_size_;
 };
 
-class StateBegining : public IState
-{
-public:
-	StateBegining(Parser *parser);
-	virtual ~StateBegining();
-
-	// IState
-	std::vector<uint8_t>::const_iterator process(
-		const std::vector<uint8_t> &binary_data,
-		std::vector<uint8_t>::const_iterator &pos);
-};
-
 class StateGetData : public IState
 {
 public:
@@ -80,19 +68,6 @@ public:
 		const std::vector<uint8_t> &binary_data,
 		std::vector<uint8_t>::const_iterator &pos);
 };
-
-class StateComplete : public IState
-{
-public:
-	StateComplete(Parser *parser);
-	virtual ~StateComplete();
-
-	// IState
-	std::vector<uint8_t>::const_iterator process(
-		const std::vector<uint8_t> &binary_data,
-		std::vector<uint8_t>::const_iterator &pos);
-};
-
 
 } // namespace DataStorage
 

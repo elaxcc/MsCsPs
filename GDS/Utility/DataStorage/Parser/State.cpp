@@ -3,6 +3,9 @@
 #include "State.h"
 
 #include "Parser.h"
+#include "../SimpleData.h"
+#include "../ArrayData.h"
+#include "../ObjectData.h"
 
 namespace GDS
 {
@@ -26,65 +29,36 @@ Parser* IState::get_parser()
 	return parser_;
 }
 
-StateBegining::StateBegining(Parser *parser)
+StateGetDataLength::StateGetDataLength(Parser *parser)
 	: IState(parser)
 {
 
 }
 
-StateBegining::~StateBegining()
+StateGetDataLength::~StateGetDataLength()
 {
 
 }
 
-std::vector<uint8_t>::const_iterator StateBegining::process(
+std::vector<uint8_t>::const_iterator StateGetDataLength::process(
 	const std::vector<uint8_t> &binary_data,
 	std::vector<uint8_t>::const_iterator &pos)
 {
-	// reset parser and go to StateGetType
-	parser_->reset();
-	parser_->set_state(IStatePtr(new StateGetType(parser_)));
-
-	return pos;
-}
-
-StateGetType::StateGetType(Parser *parser)
-	: IState(parser)
-{
-
-}
-
-StateGetType::~StateGetType()
-{
-
-}
-
-std::vector<uint8_t>::const_iterator StateGetType::process(
-	const std::vector<uint8_t> &binary_data,
-	std::vector<uint8_t>::const_iterator &pos)
-{
-	// try to find open square bracket
-	std::vector<uint8_t>::const_iterator iter = pos;
-	for (; iter != binary_data.end(); ++iter)
+	// first byte is data length, that also define data type
+	parser_->set_data_type(*pos++);
+	
+	// next byte must be delimiter
+	if (pos == binary_data.end()) //!fixme зачесто тут проверка на конец!!! ошибка!!!
 	{
-		if (*iter == DataStorage::cDelimiterStr)
-		{
-			break;
-		}
-	}
-
-	if (iter == binary_data.end()) // can't find open square bracket
-	{
+		// can't find delimiter
 		parser_->set_error(Parser::ErrorNoEnoughData);
-		return iter;
+		return ++pos;
 	}
-
-	parser_->set_data_type(std::string(pos, iter));
 
 	// go to GetName state
 	parser_->set_state(IStatePtr(new StateGetName(parser_)));
 
-	return ++iter;
+	return ++pos;
 }
 
 StateGetName::StateGetName(Parser *parser)
@@ -190,11 +164,11 @@ bool StateGetName::check_name_for_array(const std::vector<uint8_t> &name)
 	// check than both brackets exist
 	if (find_open_bracket && !find_closing_bracket)
 	{
-		parser_->set_error(Parser::ErrorArrayAbsentClosingSquaredBracket);
+		parser_->set_error(Parser::ErrorArrayAbsentCloseSquaredBracket);
 	}
 	if (!find_open_bracket && find_closing_bracket)
 	{
-		parser_->set_error(Parser::ErrorArrayAbsentOpeningSquaredBracket);
+		parser_->set_error(Parser::ErrorArrayAbsentOpenSquaredBracket);
 	}
 	is_array_ = find_open_bracket && find_closing_bracket;
 
@@ -235,82 +209,101 @@ std::vector<uint8_t>::const_iterator StateGetData::process(
 	const std::vector<uint8_t> &binary_data,
 	std::vector<uint8_t>::const_iterator &pos)
 {
-	if (parser_->get_data_type() != DataStorage::cTypeStr_Object && !parser_->obj_is_array()) // simple data
+	unsigned cnt = parser_->obj_is_array() ? parser_->get_array_size() : 1;
+
+	//!fixme надо както передеать проверку на наличие необходимого количества байт, чтобы так же работало и для объектов, а не только для простых типов
+	if (parser_->get_data_length() != 0x00)
 	{
+		// simple data
+
 		// check raw bytes amount, if it to less then need
 		// set parser error, break and wait other raw bytes
-
-		const DataStorageFactory &factory = parser_->get_factory();
-		if (pos + factory.bytes_needs_for_simple(parser_->get_data_type()) < binary_data.end())
+		if (pos + cnt*parser_->get_data_length() > binary_data.end())
 		{
 			// no enough data in name part of binary data
 			parser_->set_error(Parser::ErrorNoEnoughData);
 			return binary_data.end();
 		}
-
-		// amount of bytes is enough
-		IDataStorageObjectPtr obj_ptr = factory.create_simple(
-			parser_->get_data_type(),
-			parser_->get_data_name(),
-			std::vector<uint8_t>(pos, pos + factory.bytes_needs_for_simple(parser_->get_data_type())));
-	}
-	else if (parser_->obj_is_array()) // array data
-	{
-
-	}
-	else if (parser_->get_data_type() == DataStorage::cTypeStr_Object)
-	{
-
 	}
 
-	// object data
-
-	/*unsigned cnt = parser_->obj_is_array() ? parser_->get_array_size() : 1;
+	std::vector<IDataStorageObjectPtr> vec_data;
 	for (unsigned int i = 0; i < cnt; ++i)
 	{
-		if (parser_->get_data_type() != DataStorage::cObjectTypeStr) // simple data
+		if (parser_->get_data_length() != 0x00) // simple data
 		{
-			// check raw bytes amount, if it to less then need
-			// set parser error, break and wait other raw bytes
-
-			const DataStorageBuilderSimpleData &factory = parser_->get_factory();
-			if (pos + factory.needs_bytes(parser_->get_data_type()) < binary_data.end())
-			{
-				// no enough data in name part of binary data
-				parser_->set_error(Parser::ErrorNoEnoughData);
-				return binary_data.end();
-			}
-
-			// amount of bytes is enough
-			IDataStorageObjectPtr obj_ptr = factory.createSimple(
-				parser_->get_data_type(),
-				parser_->get_data_name(),
-				std::vector<uint8_t>(pos, pos + factory.needs_bytes(parser_->get_data_type())));
+			IDataStorageObjectPtr data_ptr(
+				new SimpleData(
+					parser_->get_data_name(),
+					(void *) &(*pos),
+					parser_->get_data_length()));
+			vec_data.push_back(data_ptr);
+			pos += parser_->get_data_length();
 		}
 		else // object data
 		{
+			// object data stored in figure brackets, check it
 
+			// try to find open figure bracket
+			std::vector<uint8_t>::const_iterator open_fig_bracket = pos;
+			if (*open_fig_bracket != DataStorage::cOpenFigureBracketStr)
+			{
+				// can't find open figure bracket
+				parser_->set_error(Parser::ErrorObjectAbsentOpenFigureBracket);
+				return pos;
+			}
+
+			// try to find close figure bracket
+			std::vector<uint8_t>::const_iterator close_fig_bracket;
+			for (; pos != binary_data.end(); ++pos)
+			{
+				if (*pos == DataStorage::cCloseFigureBracketStr)
+				{
+					close_fig_bracket = pos;
+					break;
+				}
+			}
+
+			// check existing close figure bracket
+			if (pos == binary_data.end())
+			{
+				// absence of close figure bracket means a lack of sufficient data
+				parser_->set_error(Parser::ErrorNoEnoughData);
+				return pos;
+			}
+
+			// object data stored between figure brackets
+			Parser internal_parser(std::vector<uint8_t>(++open_fig_bracket, close_fig_bracket));
+			pos = close_fig_bracket + 1;
+			
+			// if object data parsed save it
+			if (internal_parser.get_error() == Parser::ErrorOk)
+			{
+				IDataStorageObjectPtr object_ptr(
+					new ObjectData(parser_->get_data_name()));
+				std::list<IDataStorageObjectPtr>::const_iterator object_data_iter =
+					internal_parser.get_data().begin();
+				for (; object_data_iter != internal_parser.get_data().end(); ++object_data_iter)
+				{
+					object_ptr->to<ObjectData>()->insert(*(*object_data_iter));
+				}
+				vec_data.push_back(object_ptr);
+			}
 		}
-	}*/
+	}
 
-	return pos;
-}
+	// if array is parsing
+	if (parser_->obj_is_array())
+	{
+		IDataStorageObjectPtr array_obj(new ArrayData(parser_->get_data_name(), vec_data));
+		parser_->insert(array_obj);
+	}
+	else
+	{
+		parser_->insert(vec_data.front());
+	}
 
-StateComplete::StateComplete(Parser *parser)
-	: IState(parser)
-{
-
-}
-
-StateComplete::~StateComplete()
-{
-
-}
-
-std::vector<uint8_t>::const_iterator StateComplete::process(
-	const std::vector<uint8_t> &binary_data,
-	std::vector<uint8_t>::const_iterator &pos)
-{
+	parser_->reset();
+	
 	return pos;
 }
 

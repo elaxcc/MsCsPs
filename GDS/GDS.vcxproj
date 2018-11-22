@@ -149,7 +149,6 @@
     </ClCompile>
     <ClCompile Include="Utility\DataStorage\ArrayData.cpp" />
     <ClCompile Include="Utility\DataStorage\DataStorageCommon.cpp" />
-    <ClCompile Include="Utility\DataStorage\DataStorageFactory.cpp" />
     <ClCompile Include="Utility\DataStorage\File.cpp" />
     <ClCompile Include="Utility\DataStorage\IDataStorageObject.cpp" />
     <ClCompile Include="Utility\DataStorage\ObjectData.cpp" />
@@ -178,7 +177,6 @@
     <ClInclude Include="QtLibrary\QtLibElement.h" />
     <ClInclude Include="QtLibrary\QtLibWnd.h" />
     <ClInclude Include="Utility\DataStorage\ArrayData.h" />
-    <ClInclude Include="Utility\DataStorage\DataStorageFactory.h" />
     <ClInclude Include="Utility\DataStorage\File.h" />
     <ClInclude Include="Utility\DataStorage\IDataStorageObject.h" />
     <ClInclude Include="Utility\DataStorage\ObjectData.h" />

@@ -354,19 +354,35 @@ TEST(GDS_DataStorage, ObjectData)
 
 TEST(GDS_DataStorage, Parser)
 {
-	/*using namespace GDS::DataStorage;
+	using namespace GDS::DataStorage;
 
-	ObjectData obj("obj_2");
+	// parse simple data
 
-	SimpleData<char> simp_char(std::string("smpl"), 'D');
-	obj.insert(simp_char);
+	SimpleData simple_data(std::string("smpl"), 'D');
+	Parser parser(simple_data.serialize());
+	ASSERT_EQ(simple_data.get_name(), parser.get_data().front()->to<SimpleData>()->get_name());
+	ASSERT_EQ(simple_data.get_data<char>(), parser.get_data().front()->to<SimpleData>()->get_data<char>());
 
-	SimpleData<char> arr_data[1];
-	arr_data[0] = 'Q';
-	ArrayData<SimpleData<char>> arr_char("arr", arr_data, 1);
-	obj.insert(arr_char);
+	// parse array of simple data
 
-	std::vector<uint8_t> serial_data = obj.serialize();
+	SimpleData arr_data[2];
+	arr_data[0] = 'a';
+	arr_data[1] = 'B';
+	ArrayData arr("arr", 2);
+	arr.set_data(arr_data, 2);
+	parser.clean();
+	parser.exec(arr.serialize());
+	ASSERT_EQ(arr.get_name(), parser.get_data().front()->to<ArrayData>()->get_name());
 
-	Parser parser(simp_char.serialize());*/
+	ArrayData *arr_ptr = parser.get_data().front()->to<ArrayData>();
+	ASSERT_EQ(arr_data[0].get_data<char>(), (*arr_ptr)[0]->to<SimpleData>()->get_data<char>());
+	ASSERT_EQ(arr_data[1].get_data<char>(), (*arr_ptr)[1]->to<SimpleData>()->get_data<char>());
+
+	// object data
+
+	ObjectData obj("obj");
+	obj.insert(simple_data);
+	obj.insert(arr);
+	parser.clean();
+	parser.exec(obj.serialize());
 }
