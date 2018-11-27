@@ -30,14 +30,26 @@ Parser::~Parser()
 
 int Parser::exec(const std::vector<uint8_t>& binary_data)
 {
-	std::vector<uint8_t>::const_iterator iter = binary_data.begin();
-
-	while (iter != binary_data.end())
+	if (!raw_data_.empty() && error_ == ErrorNoEnoughData)
 	{
-		iter = current_state_->process(binary_data, iter);
+		error_ = ErrorOk;
+	}
 
-		//!fixme если получили ошибку о том, что не хватает данных, то
-		// нужно подождить остальные данные и продолжать парсить
+	// check stored raw data
+	raw_data_.insert(raw_data_.end(), binary_data.begin(), binary_data.end());
+
+	std::vector<uint8_t>::const_iterator iter = raw_data_.begin();
+	while (iter != raw_data_.end())
+	{
+		iter = current_state_->process(raw_data_, iter);
+		raw_data_.erase(raw_data_.begin(), iter);
+		iter = raw_data_.begin();
+
+		// if no enough raw data, store that left
+		if (error_ == ErrorNoEnoughData)
+		{
+			break;
+		}
 	}
 
 	return 0;
@@ -57,6 +69,7 @@ void Parser::clean()
 {
 	reset();
 	data_.clear();
+	raw_data_.clear();
 }
 
 void Parser::insert(IDataStorageObjectPtr data)
@@ -89,7 +102,7 @@ Parser::Error Parser::get_error() const
 	return error_;
 }
 
-void Parser::set_data_type(uint8_t data_length)
+void Parser::set_data_length(uint8_t data_length)
 {
 	data_length_ = data_length;
 }

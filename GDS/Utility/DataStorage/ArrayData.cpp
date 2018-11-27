@@ -25,6 +25,7 @@ ArrayData::ArrayData(const std::string& name, IDataStorageObjectPtr* data, unsig
 	for (unsigned i = 0; i < size; ++i)
 	{
 		data_[i] = data[i];
+		data_[i]->set_name(get_name());
 	}
 }
 
@@ -35,6 +36,7 @@ ArrayData::ArrayData(const std::string& name, const std::vector<IDataStorageObje
 	for (unsigned i = 0; i < data_.size(); ++i)
 	{
 		data_[i] = data[i];
+		data_[i]->set_name(get_name());
 	}
 }
 
@@ -48,6 +50,7 @@ void ArrayData::set_data(const std::vector<IDataStorageObjectPtr>& data)
 	for (unsigned i = 0; i < data_.size(); ++i)
 	{
 		data_[i] = data[i];
+		data_[i]->set_name(get_name());
 	}
 }
 

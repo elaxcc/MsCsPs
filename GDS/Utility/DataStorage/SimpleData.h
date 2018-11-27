@@ -46,6 +46,7 @@ template<typename T>
 SimpleData::SimpleData(const std::string &name, T data)
 	: IDataStorageObject(name)
 	, data_size_(sizeof(T))
+	, data_(nullptr)
 {
 	copy_data((void *)&data, data_size_);
 }

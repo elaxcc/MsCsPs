@@ -41,6 +41,7 @@ void ArrayData::set_data(T* data, unsigned data_size)
 	for (unsigned i = 0; i < data_size; ++i)
 	{
 		data_[i] = data[i].clone();
+		data_[i]->set_name(get_name());
 	}
 }
 

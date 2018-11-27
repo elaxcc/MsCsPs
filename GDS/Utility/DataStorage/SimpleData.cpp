@@ -19,6 +19,7 @@ SimpleData::SimpleData()
 SimpleData::SimpleData(const SimpleData &obj)
 	: IDataStorageObject(obj.get_name())
 	, data_size_(obj.get_data_size())
+	, data_(nullptr)
 {
 	clean_data();
 	copy_data(obj.data_, obj.data_size_);
@@ -27,6 +28,7 @@ SimpleData::SimpleData(const SimpleData &obj)
 SimpleData::SimpleData(const std::string &name, void *data, unsigned int data_size)
 	: IDataStorageObject(name)
 	, data_size_(data_size)
+	, data_(nullptr)
 {
 	copy_data(data, data_size_);
 }

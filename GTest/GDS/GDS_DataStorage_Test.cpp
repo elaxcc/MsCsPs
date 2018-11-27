@@ -366,8 +366,8 @@ TEST(GDS_DataStorage, Parser)
 	// parse array of simple data
 
 	SimpleData arr_data[2];
-	arr_data[0] = 'a';
-	arr_data[1] = 'B';
+	arr_data[0] = 3; arr_data[0].set_name("_1");
+	arr_data[1] = 4; arr_data[1].set_name("_2");
 	ArrayData arr("arr", 2);
 	arr.set_data(arr_data, 2);
 	parser.clean();
@@ -385,4 +385,116 @@ TEST(GDS_DataStorage, Parser)
 	obj.insert(arr);
 	parser.clean();
 	parser.exec(obj.serialize());
+	ASSERT_EQ(obj.get_name(), parser.get_data().front()->to<ObjectData>()->get_name());
+	ASSERT_EQ(simple_data.get_name(),
+		parser.get_data().front()->to<ObjectData>()->get<SimpleData>(simple_data.get_name())->get_name());
+	ASSERT_EQ(arr.get_name(),
+		parser.get_data().front()->to<ObjectData>()->get<ArrayData>(arr.get_name())->get_name());
+
+	// array of objects
+	ObjectData arr_obj_data[2];
+	arr_obj_data[0].set_name("obj_1"); arr_obj_data[0].insert<SimpleData>(arr_data[0]);
+	arr_obj_data[1].set_name("obj_2"); arr_obj_data[1].insert<SimpleData>(arr_data[1]);
+	ArrayData arr_obj("arr_obj", 2); arr_obj.set_data(arr_obj_data, 2);
+	parser.clean();
+	parser.exec(arr_obj.serialize());
+	ASSERT_EQ(arr_obj.get_size(), parser.get_data().front()->to<ArrayData>()->get_size());
+
+	// not full raw data test
+
+	// simple data
+	std::vector<uint8_t> simple_raw_data = SimpleData("smpl", 123).serialize();
+	std::vector<uint8_t> simple_first(simple_raw_data.begin(), simple_raw_data.begin() + 1);
+	std::vector<uint8_t> simple_second(simple_raw_data.begin() + 1, simple_raw_data.begin() + 5);
+	std::vector<uint8_t> simple_third(simple_raw_data.begin() + 5, simple_raw_data.begin() + 8);
+	std::vector<uint8_t> simple_fourth(simple_raw_data.begin() + 8, simple_raw_data.end());
+
+	parser.clean();
+	parser.exec(simple_first);
+	parser.exec(simple_second);
+	parser.exec(simple_third);
+	parser.exec(simple_fourth);
+
+	ASSERT_EQ("smpl", parser.get_data().front()->to<SimpleData>()->get_name());
+	ASSERT_EQ(123, parser.get_data().front()->to<SimpleData>()->get_data<int>());
+
+	// array of simple data
+	std::vector<uint8_t> array_raw_data = arr.serialize();
+	std::vector<uint8_t> array_first(array_raw_data.begin(), array_raw_data.begin() + 1);
+	std::vector<uint8_t> array_second(array_raw_data.begin() + 1, array_raw_data.begin() + 5);
+	std::vector<uint8_t> array_third(array_raw_data.begin() + 5, array_raw_data.begin() + 8);
+	std::vector<uint8_t> array_fourth(array_raw_data.begin() + 8, array_raw_data.begin() + 12);
+	std::vector<uint8_t> array_fifth(array_raw_data.begin() + 12, array_raw_data.begin() + 14);
+	std::vector<uint8_t> array_sixth(array_raw_data.begin() + 14, array_raw_data.begin() + 18);
+	std::vector<uint8_t> array_seventh(array_raw_data.begin() + 18, array_raw_data.end());
+
+	parser.clean();
+	parser.exec(array_first);
+	parser.exec(array_second);
+	parser.exec(array_third);
+	parser.exec(array_fourth);
+	parser.exec(array_fifth);
+	parser.exec(array_sixth);
+	parser.exec(array_seventh);
+
+	ASSERT_EQ(arr.get_name(), parser.get_data().front()->to<ArrayData>()->get_name());
+	ASSERT_EQ(arr.get_size(), parser.get_data().front()->to<ArrayData>()->get_size());
+	ArrayData *getted_arr_ptr = parser.get_data().front()->to<ArrayData>();
+	ASSERT_EQ(arr_data[0].get_data<int>(), (*getted_arr_ptr)[0]->to<SimpleData>()->get_data<int>());
+	ASSERT_EQ(arr_data[1].get_data<int>(), (*getted_arr_ptr)[1]->to<SimpleData>()->get_data<int>());
+
+	// object
+	std::vector<uint8_t> obj_raw_data = obj.serialize();
+	std::vector<uint8_t> obj_first(obj_raw_data.begin(), obj_raw_data.begin() + 1);
+	std::vector<uint8_t> obj_second(obj_raw_data.begin() + 1, obj_raw_data.begin() + 5);
+	std::vector<uint8_t> obj_third(obj_raw_data.begin() + 5, obj_raw_data.begin() + 8);
+	std::vector<uint8_t> obj_fourth(obj_raw_data.begin() + 8, obj_raw_data.end());
+
+	parser.clean();
+	parser.exec(obj_first);
+	parser.exec(obj_second);
+	parser.exec(obj_third);
+	parser.exec(obj_fourth);
+	ASSERT_EQ(simple_data.get_name(),
+		parser.get_data().front()->to<ObjectData>()->get<SimpleData>(
+			simple_data.get_name())->get_name());
+	ASSERT_EQ(simple_data.get_data<char>(),
+		parser.get_data().front()->to<ObjectData>()->get<SimpleData>(
+			simple_data.get_name())->get_data<char>());
+	ASSERT_EQ(arr.get_name(),
+		parser.get_data().front()->to<ObjectData>()->get<ArrayData>(
+			arr.get_name())->get_name());
+	getted_arr_ptr = parser.get_data().front()->to<ObjectData>()->get<ArrayData>(arr.get_name());
+	ASSERT_EQ(arr[0]->to<SimpleData>()->get_data<int>(),
+		(*getted_arr_ptr)[0]->to<SimpleData>()->get_data<int>());
+	ASSERT_EQ(arr[1]->to<SimpleData>()->get_data<int>(),
+		(*getted_arr_ptr)[1]->to<SimpleData>()->get_data<int>());
+
+	// array of objects
+	std::vector<uint8_t> arr_obj_raw_data = arr_obj.serialize();
+	std::vector<uint8_t> arr_obj_first(arr_obj_raw_data.begin(), arr_obj_raw_data.begin() + 1);
+	std::vector<uint8_t> arr_obj_second(arr_obj_raw_data.begin() + 1, arr_obj_raw_data.begin() + 5);
+	std::vector<uint8_t> arr_obj_third(arr_obj_raw_data.begin() + 5, arr_obj_raw_data.begin() + 8);
+	std::vector<uint8_t> arr_obj_fourth(arr_obj_raw_data.begin() + 8, arr_obj_raw_data.begin() + 14);
+	std::vector<uint8_t> arr_obj_fifth(arr_obj_raw_data.begin() + 14, arr_obj_raw_data.begin() + 20);
+	std::vector<uint8_t> arr_obj_sixth(arr_obj_raw_data.begin() + 20, arr_obj_raw_data.begin() + 30);
+	std::vector<uint8_t> arr_obj_seventh(arr_obj_raw_data.begin() + 30, arr_obj_raw_data.end());
+
+	parser.clean();
+	parser.exec(arr_obj_first);
+	parser.exec(arr_obj_second);
+	parser.exec(arr_obj_third);
+	parser.exec(arr_obj_fourth);
+	parser.exec(arr_obj_fifth);
+	parser.exec(arr_obj_sixth);
+	parser.exec(arr_obj_seventh);
+
+	getted_arr_ptr = parser.get_data().front()->to<ArrayData>();
+	ASSERT_EQ(arr_obj.get_size(), getted_arr_ptr->get_size());
+	ASSERT_EQ(arr_obj[0]->to<ObjectData>()->get_name(), (*getted_arr_ptr)[0]->to<ObjectData>()->get_name());
+	ASSERT_EQ(arr_obj[0]->to<ObjectData>()->get<SimpleData>(arr_data[0].get_name())->get_data<int>(),
+		(*getted_arr_ptr)[0]->to<ObjectData>()->get<SimpleData>(arr_data[0].get_name())->get_data<int>());
+	ASSERT_EQ(arr_obj[1]->to<ObjectData>()->get_name(), (*getted_arr_ptr)[1]->to<ObjectData>()->get_name());
+	ASSERT_EQ(arr_obj[1]->to<ObjectData>()->get<SimpleData>(arr_data[1].get_name())->get_data<int>(),
+		(*getted_arr_ptr)[1]->to<ObjectData>()->get<SimpleData>(arr_data[1].get_name())->get_data<int>());
 }

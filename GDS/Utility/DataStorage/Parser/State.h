@@ -1,5 +1,7 @@
 #pragma once
 
+#include "../IDataStorageObject.h"
+
 namespace GDS
 {
 
@@ -67,6 +69,10 @@ public:
 	std::vector<uint8_t>::const_iterator process(
 		const std::vector<uint8_t> &binary_data,
 		std::vector<uint8_t>::const_iterator &pos);
+private:
+	unsigned int cnt_;
+	uint8_t current_elem_num_;
+	std::vector<IDataStorageObjectPtr> vec_data_;
 };
 
 } // namespace DataStorage

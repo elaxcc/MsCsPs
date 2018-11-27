@@ -17,7 +17,7 @@ public:
 	{
 		ErrorOk,
 		ErrorNoEnoughData,
-		ErrorWronDelimeterAfterType,
+		ErrorWronDelimeterAfterDataLength,
 		ErrorArrayAbsentOpenSquaredBracket,
 		ErrorArrayAbsentCloseSquaredBracket,
 		ErrorArrayBytesBetweenBracketsWrong,
@@ -43,7 +43,7 @@ public:
 	void set_error(Error error);
 	Error get_error() const;
 
-	void set_data_type(uint8_t data_length);
+	void set_data_length(uint8_t data_length);
 	uint8_t get_data_length() const;
 
 	void set_data_name(const std::string &data_name);
@@ -62,6 +62,7 @@ private:
 	bool current_data_is_array_;
 	unsigned int current_data_array_size_;
 	Error error_;
+	std::vector<uint8_t> raw_data_;
 };
 
 } // namespace DataStorage
