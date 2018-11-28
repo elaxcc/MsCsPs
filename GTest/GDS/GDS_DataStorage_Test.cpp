@@ -366,8 +366,8 @@ TEST(GDS_DataStorage, Parser)
 	// parse array of simple data
 
 	SimpleData arr_data[2];
-	arr_data[0] = 3; arr_data[0].set_name("_1");
-	arr_data[1] = 4; arr_data[1].set_name("_2");
+	arr_data[0] = 3; arr_data[0].set_name("1");
+	arr_data[1] = 4; arr_data[1].set_name("2");
 	ArrayData arr("arr", 2);
 	arr.set_data(arr_data, 2);
 	parser.clean();

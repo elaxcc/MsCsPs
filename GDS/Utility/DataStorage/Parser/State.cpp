@@ -129,14 +129,7 @@ std::vector<uint8_t>::const_iterator StateGetName::process(
 
 bool StateGetName::check_name(const std::vector<uint8_t> &name)
 {
-	// first symbol in name can be '_' or alphabetic character
-	if (!(isalpha(name[0]) || name[0] == '_'))
-	{
-		parser_->set_error(Parser::ErrorNameWrongFirstSymbol);
-		return false;
-	}
-
-	// the over characters can be '_', alphabetic character or digit
+	// characters can be '_', alphabetic character or digit
 	for (auto c : name)
 	{
 		if (!isalnum(c) && c != '_')
