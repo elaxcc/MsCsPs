@@ -9,5 +9,6 @@ Debug/
 Release/
 ipch/
 Win32/
+GTestTrashFiles/
 *.user
 *~

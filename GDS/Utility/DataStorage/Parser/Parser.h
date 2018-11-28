@@ -35,7 +35,8 @@ public:
 	void reset();
 	void clean();
 	void insert(IDataStorageObjectPtr data);
-	const std::list<IDataStorageObjectPtr>& get_data() const;
+	std::list<IDataStorageObjectPtr>& get_data();
+	bool complete();
 
 	void set_state(const IStatePtr &state);
 	IStatePtr Parser::get_state();

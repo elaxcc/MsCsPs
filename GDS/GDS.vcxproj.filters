@@ -153,9 +153,6 @@
     <ClCompile Include="Utility\DataStorage\IDataStorageObject.cpp">
       <Filter>Source Files\Utility\DataStorage</Filter>
     </ClCompile>
-    <ClCompile Include="Utility\DataStorage\File.cpp">
-      <Filter>Source Files\Utility\DataStorage</Filter>
-    </ClCompile>
     <ClCompile Include="Utility\DataStorage\Parser\Parser.cpp">
       <Filter>Source Files\Utility\DataStorage\Parser</Filter>
     </ClCompile>
@@ -166,6 +163,9 @@
       <Filter>Source Files\Utility\DataStorage</Filter>
     </ClCompile>
     <ClCompile Include="Utility\DataStorage\SimpleData.cpp">
+      <Filter>Source Files\Utility\DataStorage</Filter>
+    </ClCompile>
+    <ClCompile Include="Utility\DataStorage\FileParser.cpp">
       <Filter>Source Files\Utility\DataStorage</Filter>
     </ClCompile>
   </ItemGroup>
@@ -248,14 +248,14 @@
     <ClInclude Include="Utility\DataStorage\IDataStorageObject.h">
       <Filter>Header Files\Utility\DataStorage</Filter>
     </ClInclude>
-    <ClInclude Include="Utility\DataStorage\File.h">
-      <Filter>Header Files\Utility\DataStorage</Filter>
-    </ClInclude>
     <ClInclude Include="Utility\DataStorage\Parser\Parser.h">
       <Filter>Header Files\Utility\DataStorage\Parser</Filter>
     </ClInclude>
     <ClInclude Include="Utility\DataStorage\Parser\State.h">
       <Filter>Header Files\Utility\DataStorage\Parser</Filter>
+    </ClInclude>
+    <ClInclude Include="Utility\DataStorage\FileParser.h">
+      <Filter>Header Files\Utility\DataStorage</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

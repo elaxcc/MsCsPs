@@ -67,6 +67,11 @@ std::vector<uint8_t>::const_iterator StateGetDataLength::process(
 	return ++pos;
 }
 
+IState::State StateGetDataLength::get_id()
+{
+	return IState::State_GetDataLength;
+}
+
 StateGetName::StateGetName(Parser *parser)
 	: IState(parser)
 	, is_array_(false)
@@ -125,6 +130,11 @@ std::vector<uint8_t>::const_iterator StateGetName::process(
 	parser_->set_state(IStatePtr(new StateGetData(parser_)));
 
 	return iter + 1; // return next byte after delimiter
+}
+
+IState::State StateGetName::get_id()
+{
+	return IState::State_GetName;
 }
 
 bool StateGetName::check_name(const std::vector<uint8_t> &name)
@@ -297,9 +307,37 @@ std::vector<uint8_t>::const_iterator StateGetData::process(
 		parser_->insert(vec_data_.front());
 	}
 
-	parser_->reset();
+	parser_->set_state(IStatePtr(new StateComplete(parser_)));
 	
 	return pos;
+}
+
+IState::State StateGetData::get_id()
+{
+	return IState::State_GetData;
+}
+
+StateComplete::StateComplete(Parser *parser)
+	: IState(parser)
+{
+
+}
+
+StateComplete::~StateComplete()
+{
+
+}
+
+std::vector<uint8_t>::const_iterator StateComplete::process(
+	const std::vector<uint8_t> &binary_data,
+	std::vector<uint8_t>::const_iterator &pos)
+{
+	return pos;
+}
+
+IState::State StateComplete::get_id()
+{
+	return IState::State_Complete;
 }
 
 } // namespace DataStorage

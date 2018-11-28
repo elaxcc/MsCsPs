@@ -13,6 +13,14 @@ class Parser;
 class IState
 {
 public:
+	enum State
+	{
+		State_GetDataLength,
+		State_GetName,
+		State_GetData,
+		State_Complete
+	};
+
 	IState(Parser *parser);
 	virtual ~IState();
 
@@ -21,6 +29,7 @@ public:
 	virtual std::vector<uint8_t>::const_iterator process(
 		const std::vector<uint8_t> &binary_data,
 		std::vector<uint8_t>::const_iterator &pos) = 0;
+	virtual State get_id() = 0;
 
 protected:
 	Parser *parser_;
@@ -34,9 +43,10 @@ public:
 	virtual ~StateGetDataLength();
 
 	// IState
-	std::vector<uint8_t>::const_iterator process(
+	virtual std::vector<uint8_t>::const_iterator process(
 		const std::vector<uint8_t> &binary_data,
 		std::vector<uint8_t>::const_iterator &pos);
+	virtual IState::State get_id();
 };
 
 class StateGetName : public IState
@@ -46,9 +56,10 @@ public:
 	virtual ~StateGetName();
 
 	// IState
-	std::vector<uint8_t>::const_iterator process(
+	virtual std::vector<uint8_t>::const_iterator process(
 		const std::vector<uint8_t> &binary_data,
 		std::vector<uint8_t>::const_iterator &pos);
+	virtual IState::State get_id();
 
 private:
 	bool check_name(const std::vector<uint8_t> &name);
@@ -66,13 +77,27 @@ public:
 	virtual ~StateGetData();
 
 	// IState
-	std::vector<uint8_t>::const_iterator process(
+	virtual std::vector<uint8_t>::const_iterator process(
 		const std::vector<uint8_t> &binary_data,
 		std::vector<uint8_t>::const_iterator &pos);
+	virtual IState::State get_id();
 private:
 	unsigned int cnt_;
 	uint8_t current_elem_num_;
 	std::vector<IDataStorageObjectPtr> vec_data_;
+};
+
+class StateComplete : public IState
+{
+public:
+	StateComplete(Parser *parser);
+	virtual ~StateComplete();
+
+	// IState
+	virtual std::vector<uint8_t>::const_iterator process(
+		const std::vector<uint8_t> &binary_data,
+		std::vector<uint8_t>::const_iterator &pos);
+	virtual IState::State get_id();
 };
 
 } // namespace DataStorage

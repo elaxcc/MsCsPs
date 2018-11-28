@@ -41,6 +41,12 @@ int Parser::exec(const std::vector<uint8_t>& binary_data)
 	std::vector<uint8_t>::const_iterator iter = raw_data_.begin();
 	while (iter != raw_data_.end())
 	{
+		// if parsing complete and exists more data - reset parser and continue
+		if (current_state_->get_id() == IState::State_Complete && !raw_data_.empty())
+		{
+			reset();
+		}
+
 		iter = current_state_->process(raw_data_, iter);
 		raw_data_.erase(raw_data_.begin(), iter);
 		iter = raw_data_.begin();
@@ -77,9 +83,14 @@ void Parser::insert(IDataStorageObjectPtr data)
 	data_.push_back(data);
 }
 
-const std::list<IDataStorageObjectPtr>& Parser::get_data() const
+std::list<IDataStorageObjectPtr>& Parser::get_data()
 {
 	return data_;
+}
+
+bool Parser::complete()
+{
+	return false;
 }
 
 void Parser::set_state(const IStatePtr &state)

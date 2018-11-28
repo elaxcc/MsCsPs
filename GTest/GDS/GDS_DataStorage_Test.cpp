@@ -1,8 +1,11 @@
 #include "stdafx.h"
 
+#include "GTest/Common.h"
+
 #include "GDS/Utility/DataStorage/SimpleData.h"
 #include "GDS/Utility/DataStorage/ArrayData.h"
 #include "GDS/Utility/DataStorage/ObjectData.h"
+#include "GDS/Utility/DataStorage/FileParser.h"
 #include "GDS/Utility/DataStorage/Parser/Parser.h"
 
 TEST(GDS_DataStorage, SimpleData)
@@ -497,4 +500,29 @@ TEST(GDS_DataStorage, Parser)
 	ASSERT_EQ(arr_obj[1]->to<ObjectData>()->get_name(), (*getted_arr_ptr)[1]->to<ObjectData>()->get_name());
 	ASSERT_EQ(arr_obj[1]->to<ObjectData>()->get<SimpleData>(arr_data[1].get_name())->get_data<int>(),
 		(*getted_arr_ptr)[1]->to<ObjectData>()->get<SimpleData>(arr_data[1].get_name())->get_data<int>());
+
+	// testing of part of data parsing
+	parser.clean();
+	parser.exec(simple_raw_data);
+	ASSERT_EQ(IState::State_Complete, parser.get_state()->get_id());
+	parser.exec(array_raw_data);
+	ASSERT_EQ(IState::State_Complete, parser.get_state()->get_id());
+	ASSERT_EQ(2, parser.get_data().size());
+}
+
+TEST(GDS_DataStorage, ParserFile)
+{
+	using namespace GDS::DataStorage;
+
+	SimpleData simple_data(std::string("smpl"), 'D');
+
+	FileParser file_parser;
+	file_parser.write(cGTestFilePath + "TEST_GDS_DataStorage_ParserFile.bin", simple_data.serialize());
+
+	file_parser.read(cGTestFilePath + "TEST_GDS_DataStorage_ParserFile.bin");
+	ASSERT_EQ(true, file_parser.is_parse_complete());
+
+	SimpleData *simple_data_ptr = file_parser.get_parsed_data().front()->to<SimpleData>();
+	ASSERT_EQ(simple_data.get_name(), simple_data_ptr->get_name());
+	ASSERT_EQ(simple_data.get_data<char>(), simple_data_ptr->get_data<char>());
 }
