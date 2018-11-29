@@ -517,9 +517,11 @@ TEST(GDS_DataStorage, ParserFile)
 	SimpleData simple_data(std::string("smpl"), 'D');
 
 	FileParser file_parser;
-	file_parser.write(cGTestFilePath + "TEST_GDS_DataStorage_ParserFile.bin", simple_data.serialize());
+	bool result = file_parser.write(cGTestFilePath + "TEST_GDS_DataStorage_ParserFile.bin", simple_data.serialize());
+	ASSERT_EQ(true, result);
 
-	file_parser.read(cGTestFilePath + "TEST_GDS_DataStorage_ParserFile.bin");
+	result = file_parser.read(cGTestFilePath + "TEST_GDS_DataStorage_ParserFile.bin");
+	ASSERT_EQ(true, result);
 	ASSERT_EQ(true, file_parser.is_parse_complete());
 
 	SimpleData *simple_data_ptr = file_parser.get_parsed_data().front()->to<SimpleData>();
