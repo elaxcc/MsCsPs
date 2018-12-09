@@ -10,7 +10,7 @@ namespace GDS
 class QtLibElement : public QGraphicsPixmapItem
 {
 public:
-	QtLibElement(LibElementPtr lib_element);
+	QtLibElement(LibElementPtr lib_element, QWidget *wgt = nullptr);
 	~QtLibElement();
 
 private:

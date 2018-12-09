@@ -5,7 +5,7 @@
 namespace GDS
 {
 
-QtLibElement::QtLibElement(LibElementPtr lib_element)
+QtLibElement::QtLibElement(LibElementPtr lib_element, QWidget *wgt/* = nullptr*/)
 	: lib_element_(lib_element)
 {
 
