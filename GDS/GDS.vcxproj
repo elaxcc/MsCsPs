@@ -139,6 +139,8 @@
     <ClCompile Include="Library\Lib.cpp" />
     <ClCompile Include="Library\LibController.cpp" />
     <ClCompile Include="Library\LibElement.cpp" />
+    <ClCompile Include="Library\LibOperation.cpp" />
+    <ClCompile Include="Library\LibPin.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="QtEditor\QtEditor.cpp" />
     <ClCompile Include="QtLibrary\QtLibElement.cpp" />
@@ -168,10 +170,11 @@
     <ClInclude Include="Editor\Elements\PinFactory.h" />
     <ClInclude Include="Editor\Elements\PinInput.h" />
     <ClInclude Include="Editor\Elements\PinOutput.h" />
-    <ClInclude Include="Library\ILibElement.h" />
     <ClInclude Include="Library\Lib.h" />
     <ClInclude Include="Library\LibController.h" />
     <ClInclude Include="Library\LibElement.h" />
+    <ClInclude Include="Library\LibOperation.h" />
+    <ClInclude Include="Library\LibPin.h" />
     <ClInclude Include="Library\LibView.h" />
     <ClInclude Include="QtEditor\QtEditor.h" />
     <ClInclude Include="QtLibrary\QtLibElement.h" />

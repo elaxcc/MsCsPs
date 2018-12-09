@@ -2,7 +2,7 @@
 
 #include <QGraphicsPixmapItem>
 
-#include "Library/ILibElement.h"
+#include "Library/LibElement.h"
 
 namespace GDS
 {
@@ -10,11 +10,11 @@ namespace GDS
 class QtLibElement : public QGraphicsPixmapItem
 {
 public:
-	QtLibElement(ILibElementPtr lib_element);
+	QtLibElement(LibElementPtr lib_element);
 	~QtLibElement();
 
 private:
-	ILibElementPtr lib_element_;
+	LibElementPtr lib_element_;
 };
 
 } // namespace GDS

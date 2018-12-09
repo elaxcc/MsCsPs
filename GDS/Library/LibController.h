@@ -15,7 +15,7 @@ public:
 	void setView(LibView* view);
 
 private:
-	std::list<ILibElementPtr> libs_;
+	std::list<LibElementPtr> libs_;
 	LibView* view_;
 };
 

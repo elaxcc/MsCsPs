@@ -5,7 +5,7 @@
 namespace GDS
 {
 
-QtLibElement::QtLibElement(ILibElementPtr lib_element)
+QtLibElement::QtLibElement(LibElementPtr lib_element)
 	: lib_element_(lib_element)
 {
 

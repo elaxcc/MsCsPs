@@ -5,24 +5,37 @@
 namespace GDS
 {
 
-Lib::Lib()
+Lib::Lib(const std::string &name, const std::string &comment,
+	const std::vector<uint8_t>& icon, const LibElementPtr &parent)
+	: LibElement(name, comment, icon, parent)
 {
 
 }
 
 Lib::~Lib()
 {
-	elements_.clear();
+	internal_libs_.clear();
+	internal_operations_.clear();
 }
 
-const std::list<ILibElementPtr>& Lib::getElements() const
+void Lib::addLib(const LibElementPtr &lib)
 {
-	return elements_;
+	internal_libs_.push_back(lib);
 }
 
-const ILibElementPtr Lib::getParent() const
+const std::list<LibElementPtr>& Lib::getLibs() const
 {
-	return parent_;
+	return internal_libs_;
+}
+
+void Lib::addFunction(const LibElementPtr &func)
+{
+	internal_operations_.push_back(func);
+}
+
+const std::list<LibElementPtr>& Lib::getFunctions() const
+{
+	return internal_operations_;
 }
 
 } // namespace GDS

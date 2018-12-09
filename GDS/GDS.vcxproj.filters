@@ -168,6 +168,12 @@
     <ClCompile Include="Utility\DataStorage\FileParser.cpp">
       <Filter>Source Files\Utility\DataStorage</Filter>
     </ClCompile>
+    <ClCompile Include="Library\LibPin.cpp">
+      <Filter>Source Files\Library</Filter>
+    </ClCompile>
+    <ClCompile Include="Library\LibOperation.cpp">
+      <Filter>Source Files\Library</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stdafx.h">
@@ -205,9 +211,6 @@
     </ClInclude>
     <ClInclude Include="Editor\Elements\PinOutput.h">
       <Filter>Header Files\Editor\Elements</Filter>
-    </ClInclude>
-    <ClInclude Include="Library\ILibElement.h">
-      <Filter>Header Files\Library</Filter>
     </ClInclude>
     <ClInclude Include="Library\Lib.h">
       <Filter>Header Files\Library</Filter>
@@ -256,6 +259,12 @@
     </ClInclude>
     <ClInclude Include="Utility\DataStorage\FileParser.h">
       <Filter>Header Files\Utility\DataStorage</Filter>
+    </ClInclude>
+    <ClInclude Include="Library\LibPin.h">
+      <Filter>Header Files\Library</Filter>
+    </ClInclude>
+    <ClInclude Include="Library\LibOperation.h">
+      <Filter>Header Files\Library</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
