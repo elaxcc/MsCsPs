@@ -12,6 +12,7 @@ class QtLibWnd
 	: public QGraphicsView
 	, public LibView
 {
+	Q_OBJECT
 public:
 	QtLibWnd(QWidget* wgt = 0);
 	~QtLibWnd();
