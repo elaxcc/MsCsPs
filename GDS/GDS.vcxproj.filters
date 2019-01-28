@@ -82,6 +82,18 @@
     <Filter Include="Source Files\Utility\DataStorage\Parser">
       <UniqueIdentifier>{3e413651-8894-480a-b931-166776cc494f}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\Editor\Operators">
+      <UniqueIdentifier>{0424c225-50c5-4191-9a16-13526d91ff89}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Editor\Operators">
+      <UniqueIdentifier>{578140fe-c10f-44d9-be7a-2441e1379a63}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Editor\Types">
+      <UniqueIdentifier>{68932b1c-e26a-4de5-9a77-eaf98201fffe}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Editor\Types">
+      <UniqueIdentifier>{6db0860b-7993-4ec9-a52b-8ba21f75d71e}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -174,6 +186,12 @@
     <ClCompile Include="Library\LibOperation.cpp">
       <Filter>Source Files\Library</Filter>
     </ClCompile>
+    <ClCompile Include="Editor\Operators\IOperator.cpp">
+      <Filter>Source Files\Editor\Operators</Filter>
+    </ClCompile>
+    <ClCompile Include="Editor\Types\SimpleTypes.cpp">
+      <Filter>Source Files\Editor\Types</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stdafx.h">
@@ -230,9 +248,6 @@
     <ClInclude Include="QtLibrary\QtLibElement.h">
       <Filter>Header Files\QtLibrary</Filter>
     </ClInclude>
-    <ClInclude Include="QtLibrary\QtLibWnd.h">
-      <Filter>Header Files\QtLibrary</Filter>
-    </ClInclude>
     <ClInclude Include="Utility\Geometry.h">
       <Filter>Header Files\Utility</Filter>
     </ClInclude>
@@ -266,9 +281,18 @@
     <ClInclude Include="Library\LibOperation.h">
       <Filter>Header Files\Library</Filter>
     </ClInclude>
+    <ClInclude Include="Editor\Operators\IOperator.h">
+      <Filter>Header Files\Editor\Operators</Filter>
+    </ClInclude>
+    <ClInclude Include="Editor\Types\SimpleTypes.h">
+      <Filter>Header Files\Editor\Types</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <QtMoc Include="GDS_Wnd.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="QtLibrary\QtLibWnd.h">
       <Filter>Header Files</Filter>
     </QtMoc>
   </ItemGroup>
