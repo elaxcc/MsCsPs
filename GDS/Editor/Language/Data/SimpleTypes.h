@@ -11,26 +11,28 @@ class SimpleType
 public:
 	enum Type
 	{
-		char_Type,
-		uchar_Type,
-		short_Type,
-		ushort_Type,
-		int_Type,
-		uint_Type,
-		float_Type,
-		double_Type
+		charType,
+		ucharType,
+		shortType,
+		ushortType,
+		intType,
+		uintType,
+		floatType,
+		doubleType,
+		boolType
 	};
 
 	SimpleType(Type type);
 	~SimpleType();
 
-	Type get_type() const;
+	Type getType() const;
 
-	virtual int get_size() = 0;
+	virtual int getSize() = 0;
 
 private:
 	Type type_;
 };
+typedef std::shared_ptr<SimpleType> SimpleTypePtr;
 
 class CharType : public SimpleType
 {
@@ -41,7 +43,7 @@ public:
 	~CharType();
 
 	// SimpleType
-	virtual int get_size();
+	virtual int getSize();
 };
 
 class UCharType : public SimpleType
@@ -53,7 +55,7 @@ public:
 	~UCharType();
 
 	// SimpleType
-	virtual int get_size();
+	virtual int getSize();
 };
 
 class ShortType : public SimpleType
@@ -65,7 +67,7 @@ public:
 	~ShortType();
 
 	// SimpleType
-	virtual int get_size();
+	virtual int getSize();
 };
 
 class UShortType : public SimpleType
@@ -77,7 +79,7 @@ public:
 	~UShortType();
 
 	// SimpleType
-	virtual int get_size();
+	virtual int getSize();
 };
 
 class IntType : public SimpleType
@@ -89,7 +91,7 @@ public:
 	~IntType();
 
 	// SimpleType
-	virtual int get_size();
+	virtual int getSize();
 };
 
 class UIntType : public SimpleType
@@ -101,7 +103,7 @@ public:
 	~UIntType();
 
 	// SimpleType
-	virtual int get_size();
+	virtual int getSize();
 };
 
 class FloatType : public SimpleType
@@ -113,7 +115,7 @@ public:
 	~FloatType();
 
 	// SimpleType
-	virtual int get_size();
+	virtual int getSize();
 };
 
 class DoubleType : public SimpleType
@@ -125,8 +127,21 @@ public:
 	~DoubleType();
 
 	// SimpleType
-	virtual int get_size();
+	virtual int getSize();
 };
+
+class BoolType : public SimpleType
+{
+public:
+	typedef bool type;
+
+	BoolType();
+	~BoolType();
+
+	// SimpleType
+	virtual int getSize();
+};
+
 
 } // namespace Editor
 

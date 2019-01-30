@@ -19,13 +19,13 @@ SimpleType::~SimpleType()
 
 }
 
-SimpleType::Type SimpleType::get_type() const
+SimpleType::Type SimpleType::getType() const
 {
 	return type_;
 }
 
 CharType::CharType()
-	: SimpleType(SimpleType::char_Type)
+	: SimpleType(SimpleType::charType)
 {
 
 }
@@ -35,13 +35,13 @@ CharType::~CharType()
 
 }
 
-int CharType::get_size()
+int CharType::getSize()
 {
 	return sizeof(CharType::type);
 }
 
 UCharType::UCharType()
-	: SimpleType(SimpleType::uchar_Type)
+	: SimpleType(SimpleType::ucharType)
 {
 
 }
@@ -51,13 +51,13 @@ UCharType::~UCharType()
 
 }
 
-int UCharType::get_size()
+int UCharType::getSize()
 {
 	return sizeof(UCharType::type);
 }
 
 ShortType::ShortType()
-	: SimpleType(SimpleType::short_Type)
+	: SimpleType(SimpleType::shortType)
 {
 
 }
@@ -67,13 +67,13 @@ ShortType::~ShortType()
 
 }
 
-int ShortType::get_size()
+int ShortType::getSize()
 {
 	return sizeof(ShortType::type);
 }
 
 UShortType::UShortType()
-	: SimpleType(SimpleType::ushort_Type)
+	: SimpleType(SimpleType::ushortType)
 {
 
 }
@@ -83,13 +83,13 @@ UShortType::~UShortType()
 
 }
 
-int UShortType::get_size()
+int UShortType::getSize()
 {
 	return sizeof(UShortType::type);
 }
 
 IntType::IntType()
-	: SimpleType(SimpleType::int_Type)
+	: SimpleType(SimpleType::intType)
 {
 
 }
@@ -99,13 +99,13 @@ IntType::~IntType()
 
 }
 
-int IntType::get_size()
+int IntType::getSize()
 {
 	return sizeof(IntType::type);
 }
 
 UIntType::UIntType()
-	: SimpleType(SimpleType::uint_Type)
+	: SimpleType(SimpleType::uintType)
 {
 
 }
@@ -115,13 +115,13 @@ UIntType::~UIntType()
 
 }
 
-int UIntType::get_size()
+int UIntType::getSize()
 {
 	return sizeof(UIntType::type);
 }
 
 FloatType::FloatType()
-	: SimpleType(SimpleType::float_Type)
+	: SimpleType(SimpleType::floatType)
 {
 
 }
@@ -131,13 +131,13 @@ FloatType::~FloatType()
 
 }
 
-int FloatType::get_size()
+int FloatType::getSize()
 {
 	return sizeof(FloatType::type);
 }
 
 DoubleType::DoubleType()
-	: SimpleType(SimpleType::double_Type)
+	: SimpleType(SimpleType::doubleType)
 {
 
 }
@@ -147,9 +147,25 @@ DoubleType::~DoubleType()
 
 }
 
-int DoubleType::get_size()
+int DoubleType::getSize()
 {
 	return sizeof(DoubleType::type);
+}
+
+BoolType::BoolType()
+	: SimpleType(SimpleType::boolType)
+{
+
+}
+
+BoolType::~BoolType()
+{
+
+}
+
+int BoolType::getSize()
+{
+	return sizeof(BoolType::type);
 }
 
 } // namespace Editor

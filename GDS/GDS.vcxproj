@@ -132,8 +132,9 @@
     <ClCompile Include="Editor\Elements\PinFactory.cpp" />
     <ClCompile Include="Editor\Elements\PinInput.cpp" />
     <ClCompile Include="Editor\Elements\PinOutput.cpp" />
-    <ClCompile Include="Editor\Operators\IOperator.cpp" />
-    <ClCompile Include="Editor\Types\SimpleTypes.cpp" />
+    <ClCompile Include="Editor\Language\Data\SimpleTypes.cpp" />
+    <ClCompile Include="Editor\Language\Data\Varriable.cpp" />
+    <ClCompile Include="Editor\Language\Operators\IOperator.cpp" />
     <ClCompile Include="GDS_Wnd.cpp" />
     <ClCompile Include="Library\Lib.cpp" />
     <ClCompile Include="Library\LibController.cpp" />
@@ -169,8 +170,9 @@
     <ClInclude Include="Editor\Elements\PinFactory.h" />
     <ClInclude Include="Editor\Elements\PinInput.h" />
     <ClInclude Include="Editor\Elements\PinOutput.h" />
-    <ClInclude Include="Editor\Operators\IOperator.h" />
-    <ClInclude Include="Editor\Types\SimpleTypes.h" />
+    <ClInclude Include="Editor\Language\Data\SimpleTypes.h" />
+    <ClInclude Include="Editor\Language\Data\Varriable.h" />
+    <ClInclude Include="Editor\Language\Operators\IOperator.h" />
     <ClInclude Include="Library\Lib.h" />
     <ClInclude Include="Library\LibController.h" />
     <ClInclude Include="Library\LibElement.h" />

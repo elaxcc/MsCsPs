@@ -82,16 +82,22 @@
     <Filter Include="Source Files\Utility\DataStorage\Parser">
       <UniqueIdentifier>{3e413651-8894-480a-b931-166776cc494f}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Header Files\Editor\Operators">
+    <Filter Include="Header Files\Editor\Language">
+      <UniqueIdentifier>{23869b31-563b-48cd-8535-ecc03cbbf053}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Editor\Language">
+      <UniqueIdentifier>{e1fc1715-26bd-4937-89b0-95015ec08cf6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Editor\Language\Operators">
       <UniqueIdentifier>{0424c225-50c5-4191-9a16-13526d91ff89}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source Files\Editor\Operators">
-      <UniqueIdentifier>{578140fe-c10f-44d9-be7a-2441e1379a63}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Header Files\Editor\Types">
+    <Filter Include="Header Files\Editor\Language\Data">
       <UniqueIdentifier>{68932b1c-e26a-4de5-9a77-eaf98201fffe}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source Files\Editor\Types">
+    <Filter Include="Source Files\Editor\Language\Operators">
+      <UniqueIdentifier>{578140fe-c10f-44d9-be7a-2441e1379a63}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Editor\Language\Data">
       <UniqueIdentifier>{6db0860b-7993-4ec9-a52b-8ba21f75d71e}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
@@ -186,11 +192,14 @@
     <ClCompile Include="Library\LibOperation.cpp">
       <Filter>Source Files\Library</Filter>
     </ClCompile>
-    <ClCompile Include="Editor\Operators\IOperator.cpp">
-      <Filter>Source Files\Editor\Operators</Filter>
+    <ClCompile Include="Editor\Language\Operators\IOperator.cpp">
+      <Filter>Source Files\Editor\Language\Operators</Filter>
     </ClCompile>
-    <ClCompile Include="Editor\Types\SimpleTypes.cpp">
-      <Filter>Source Files\Editor\Types</Filter>
+    <ClCompile Include="Editor\Language\Data\SimpleTypes.cpp">
+      <Filter>Source Files\Editor\Language\Data</Filter>
+    </ClCompile>
+    <ClCompile Include="Editor\Language\Data\Varriable.cpp">
+      <Filter>Source Files\Editor\Language\Data</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -281,11 +290,14 @@
     <ClInclude Include="Library\LibOperation.h">
       <Filter>Header Files\Library</Filter>
     </ClInclude>
-    <ClInclude Include="Editor\Operators\IOperator.h">
-      <Filter>Header Files\Editor\Operators</Filter>
+    <ClInclude Include="Editor\Language\Operators\IOperator.h">
+      <Filter>Header Files\Editor\Language\Operators</Filter>
     </ClInclude>
-    <ClInclude Include="Editor\Types\SimpleTypes.h">
-      <Filter>Header Files\Editor\Types</Filter>
+    <ClInclude Include="Editor\Language\Data\SimpleTypes.h">
+      <Filter>Header Files\Editor\Language\Data</Filter>
+    </ClInclude>
+    <ClInclude Include="Editor\Language\Data\Varriable.h">
+      <Filter>Header Files\Editor\Language\Data</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
