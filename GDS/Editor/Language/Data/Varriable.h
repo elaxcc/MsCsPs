@@ -23,6 +23,7 @@ private:
 	SimpleTypePtr type_;
 	void *value_;
 };
+typedef std::shared_ptr<Varriable> VarriablePtr;
 
 class CharVarriable : public Varriable
 {
@@ -34,6 +35,7 @@ public:
 	void setValue(CharType::type value);
 	CharType::type* getValue();
 };
+typedef std::shared_ptr<CharVarriable> CharVarriablePtr;
 
 class UCharVarriable : public Varriable
 {
@@ -45,6 +47,7 @@ public:
 	void setValue(UCharType::type value);
 	UCharType::type* getValue();
 };
+typedef std::shared_ptr<UCharVarriable> UCharVarriablePtr;
 
 class ShortVarriable : public Varriable
 {
@@ -56,6 +59,7 @@ public:
 	void setValue(ShortType::type value);
 	ShortType::type* getValue();
 };
+typedef std::shared_ptr<ShortVarriable> ShortVarriablePtr;
 
 class UShortVarriable : public Varriable
 {
@@ -67,6 +71,7 @@ public:
 	void setValue(UShortType::type value);
 	UShortType::type* getValue();
 };
+typedef std::shared_ptr<UShortVarriable> UShortVarriablePtr;
 
 class IntVarriable : public Varriable
 {
@@ -78,6 +83,7 @@ public:
 	void setValue(IntType::type value);
 	IntType::type* getValue();
 };
+typedef std::shared_ptr<IntVarriable> IntVarriablePtr;
 
 class UIntVarriable : public Varriable
 {
@@ -89,6 +95,7 @@ public:
 	void setValue(UIntType::type value);
 	UIntType::type* getValue();
 };
+typedef std::shared_ptr<UIntVarriable> UIntVarriablePtr;
 
 class FloatVarriable : public Varriable
 {
@@ -100,6 +107,7 @@ public:
 	void setValue(FloatType::type value);
 	FloatType::type* getValue();
 };
+typedef std::shared_ptr<FloatVarriable> FloatVarriablePtr;
 
 class DoubleVarriable : public Varriable
 {
@@ -111,6 +119,7 @@ public:
 	void setValue(DoubleType::type value);
 	DoubleType::type* getValue();
 };
+typedef std::shared_ptr<DoubleVarriable> DoubleVarriablePtr;
 
 class BoolVarriable : public Varriable
 {
@@ -122,6 +131,7 @@ public:
 	void setValue(BoolType::type value);
 	BoolType::type* getValue();
 };
+typedef std::shared_ptr<BoolVarriable> BoolVarriablePtr;
 
 } // namespace Editor
 

@@ -192,14 +192,14 @@
     <ClCompile Include="Library\LibOperation.cpp">
       <Filter>Source Files\Library</Filter>
     </ClCompile>
-    <ClCompile Include="Editor\Language\Operators\IOperator.cpp">
-      <Filter>Source Files\Editor\Language\Operators</Filter>
-    </ClCompile>
     <ClCompile Include="Editor\Language\Data\SimpleTypes.cpp">
       <Filter>Source Files\Editor\Language\Data</Filter>
     </ClCompile>
     <ClCompile Include="Editor\Language\Data\Varriable.cpp">
       <Filter>Source Files\Editor\Language\Data</Filter>
+    </ClCompile>
+    <ClCompile Include="Editor\Language\Operators\Operator.cpp">
+      <Filter>Source Files\Editor\Language\Operators</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -290,14 +290,14 @@
     <ClInclude Include="Library\LibOperation.h">
       <Filter>Header Files\Library</Filter>
     </ClInclude>
-    <ClInclude Include="Editor\Language\Operators\IOperator.h">
-      <Filter>Header Files\Editor\Language\Operators</Filter>
-    </ClInclude>
     <ClInclude Include="Editor\Language\Data\SimpleTypes.h">
       <Filter>Header Files\Editor\Language\Data</Filter>
     </ClInclude>
     <ClInclude Include="Editor\Language\Data\Varriable.h">
       <Filter>Header Files\Editor\Language\Data</Filter>
+    </ClInclude>
+    <ClInclude Include="Editor\Language\Operators\Operator.h">
+      <Filter>Header Files\Editor\Language\Operators</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
