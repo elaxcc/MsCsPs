@@ -132,6 +132,7 @@
     <ClCompile Include="Editor\Elements\PinFactory.cpp" />
     <ClCompile Include="Editor\Elements\PinInput.cpp" />
     <ClCompile Include="Editor\Elements\PinOutput.cpp" />
+    <ClCompile Include="Editor\Language\Data\ConstantExpr.cpp" />
     <ClCompile Include="Editor\Language\Data\SimpleTypes.cpp" />
     <ClCompile Include="Editor\Language\Data\Varriable.cpp" />
     <ClCompile Include="Editor\Language\Operators\Operator.cpp" />
@@ -170,6 +171,7 @@
     <ClInclude Include="Editor\Elements\PinFactory.h" />
     <ClInclude Include="Editor\Elements\PinInput.h" />
     <ClInclude Include="Editor\Elements\PinOutput.h" />
+    <ClInclude Include="Editor\Language\Data\ConstantExpr.h" />
     <ClInclude Include="Editor\Language\Data\SimpleTypes.h" />
     <ClInclude Include="Editor\Language\Data\Varriable.h" />
     <ClInclude Include="Editor\Language\Operators\Operator.h" />

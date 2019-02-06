@@ -1,6 +1,6 @@
 #pragma once
 
-#include "SimpleTypes.h"
+#include "ConstantExpr.h"
 
 namespace GDS
 {
@@ -11,127 +11,82 @@ namespace Editor
 class Varriable
 {
 public:
-	Varriable(SimpleType *type);
+	Varriable(const ConstantExprPtr &type, const std::string& name);
 	~Varriable();
+	
+	void setName(const std::string &name);
 
-	SimpleTypePtr getType() const;
-
-protected:
-	void* getValue() const;
+	ConstantExprPtr getConstantExpr();
+	const std::string& getName() const;
 
 private:
-	SimpleTypePtr type_;
-	void *value_;
+	ConstantExprPtr constExpr_;
+	std::string name_;
 };
 typedef std::shared_ptr<Varriable> VarriablePtr;
 
 class CharVarriable : public Varriable
 {
 public:
-	CharVarriable();
-	CharVarriable(CharType::type value);
+	CharVarriable(CharType::type value, const std::string &name);
 	~CharVarriable();
-
-	void setValue(CharType::type value);
-	CharType::type* getValue();
 };
-typedef std::shared_ptr<CharVarriable> CharVarriablePtr;
 
 class UCharVarriable : public Varriable
 {
 public:
-	UCharVarriable();
-	UCharVarriable(UCharType::type value);
+	UCharVarriable(UCharType::type value, const std::string &name);
 	~UCharVarriable();
-
-	void setValue(UCharType::type value);
-	UCharType::type* getValue();
 };
-typedef std::shared_ptr<UCharVarriable> UCharVarriablePtr;
 
 class ShortVarriable : public Varriable
 {
 public:
-	ShortVarriable();
-	ShortVarriable(ShortType::type value);
+	ShortVarriable(ShortType::type value, const std::string &name);
 	~ShortVarriable();
-
-	void setValue(ShortType::type value);
-	ShortType::type* getValue();
 };
-typedef std::shared_ptr<ShortVarriable> ShortVarriablePtr;
 
 class UShortVarriable : public Varriable
 {
 public:
-	UShortVarriable();
-	UShortVarriable(UShortType::type value);
+	UShortVarriable(UShortType::type value, const std::string &name);
 	~UShortVarriable();
-
-	void setValue(UShortType::type value);
-	UShortType::type* getValue();
 };
-typedef std::shared_ptr<UShortVarriable> UShortVarriablePtr;
 
 class IntVarriable : public Varriable
 {
 public:
-	IntVarriable();
-	IntVarriable(IntType::type value);
+	IntVarriable(IntType::type value, const std::string &name);
 	~IntVarriable();
-
-	void setValue(IntType::type value);
-	IntType::type* getValue();
 };
-typedef std::shared_ptr<IntVarriable> IntVarriablePtr;
 
 class UIntVarriable : public Varriable
 {
 public:
-	UIntVarriable();
-	UIntVarriable(UIntType::type value);
+	UIntVarriable(UIntType::type value, const std::string &name);
 	~UIntVarriable();
-
-	void setValue(UIntType::type value);
-	UIntType::type* getValue();
 };
-typedef std::shared_ptr<UIntVarriable> UIntVarriablePtr;
 
 class FloatVarriable : public Varriable
 {
 public:
-	FloatVarriable();
-	FloatVarriable(FloatType::type value);
+	FloatVarriable(FloatType::type value, const std::string &name);
 	~FloatVarriable();
-
-	void setValue(FloatType::type value);
-	FloatType::type* getValue();
 };
-typedef std::shared_ptr<FloatVarriable> FloatVarriablePtr;
 
 class DoubleVarriable : public Varriable
 {
 public:
-	DoubleVarriable();
-	DoubleVarriable(DoubleType::type value);
+	DoubleVarriable(DoubleType::type value, const std::string &name);
 	~DoubleVarriable();
-
-	void setValue(DoubleType::type value);
-	DoubleType::type* getValue();
 };
-typedef std::shared_ptr<DoubleVarriable> DoubleVarriablePtr;
 
 class BoolVarriable : public Varriable
 {
 public:
-	BoolVarriable();
-	BoolVarriable(BoolType::type value);
+	BoolVarriable(BoolType::type value, const std::string &name);
 	~BoolVarriable();
-
-	void setValue(BoolType::type value);
-	BoolType::type* getValue();
 };
-typedef std::shared_ptr<BoolVarriable> BoolVarriablePtr;
 
 } // namespace Editor
 

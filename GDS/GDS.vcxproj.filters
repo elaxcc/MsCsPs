@@ -201,6 +201,9 @@
     <ClCompile Include="Editor\Language\Operators\Operator.cpp">
       <Filter>Source Files\Editor\Language\Operators</Filter>
     </ClCompile>
+    <ClCompile Include="Editor\Language\Data\ConstantExpr.cpp">
+      <Filter>Source Files\Editor\Language\Data</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stdafx.h">
@@ -298,6 +301,9 @@
     </ClInclude>
     <ClInclude Include="Editor\Language\Operators\Operator.h">
       <Filter>Header Files\Editor\Language\Operators</Filter>
+    </ClInclude>
+    <ClInclude Include="Editor\Language\Data\ConstantExpr.h">
+      <Filter>Header Files\Editor\Language\Data</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
